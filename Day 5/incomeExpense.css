@@ -1,0 +1,63 @@
+.container{
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.form{
+    display: flex;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.form > .form__incomeExpense{
+    flex:1;
+    background: linear-gradient(171deg, rgba(0,0,0,1) 0%, rgba(130,130,130,1) 100%);
+
+}
+.form > .form__description{
+    flex: 6;
+}
+
+.form > .form__amount{
+    flex: 3;
+}
+.form > .form__add > img{
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+}
+
+.form > .form__add{
+    background: linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(130,130,130,1) 100%);
+    color: aliceblue;
+    display: flex;
+    align-items: center;
+}
+
+.content{
+    display: flex;
+    margin-top: 30px;
+}
+section{
+    flex:auto;
+    border: 1px solid gray;
+}
+
+section> div{
+    height:200px;
+    width: 100%;
+    text-align: center;
+}
+
+.div__income{
+    background-color: chartreuse;
+}
+.div__moneyLeft{
+    background-color: orange;
+}
+.div__expense{
+    background-color: red;
+}
+
+li{
+    list-style: none;
+}

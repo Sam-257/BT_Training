@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<body>
+    <input type="text" id="principle" placeholder="Principle">
+    <input type="text" id="time" placeholder="Time">
+    <input type="text" id="rate" placeholder="Rate">
+    <input type="text" id="result" value="0">
+    <button onclick=calcInterest()> Calculate</button>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Salary</th>
+        </tr>
+        <tr>
+            <td>Peter</td>
+            <td class="salary">3000</td>
+        </tr>
+        <tr>
+            <td>Mike</td>
+            <td class="salary">5000</td>
+        </tr>
+        <tr>
+            <td>John</td>
+            <td class="salary">6000</td>
+        </tr>
+        <tr>
+            <td>Rick</td>
+            <td class="salary">10000</td>
+        </tr>
+        <tr>
+            <td><button onclick=calcTotal()>Total</button></td>
+            <td id="res">0</td>
+        </tr>
+    </table>
+
+    <div>
+        <input type="text" id="caps" onkeyup=capitalize()>
+    </div>
+    <script src="demo1.js"></script>
+</body>
+</html>

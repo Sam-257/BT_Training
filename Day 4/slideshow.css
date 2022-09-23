@@ -1,0 +1,14 @@
+.imageList{
+    display: flex;
+    justify-content: center;
+}
+
+.imageList>img{
+    width: 700px;
+    height: 500px;
+    margin: 25px;
+    transition: transform .2s;
+}
+.imageList>img:hover{
+    transform: scale(1.1);
+}

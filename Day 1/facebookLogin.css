@@ -1,0 +1,48 @@
+section {
+  background-color: #e7e5e5;
+  padding: 50px;
+}
+h1 {
+  color: #1aade8;
+  text-align: center;
+}
+p {
+  color: #acadae;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: white;
+  width: 20%;
+  margin-left: 40%;
+  border-radius: 5px;
+  text-align: center;
+  padding: 10px;
+  padding-right: 15px;
+}
+input {
+  width: 90%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+input[type="text"] {
+  border: 1px solid #e7e5e5;
+}
+input[type="password"] {
+  border: 1px solid #e7e5e5;
+}
+input[type="submit"] {
+  border: none;
+  background-color: #1aade8;
+  color: white;
+  font-size: 15px;
+}
+.links {
+  margin: 15px;
+  font-size: 15px;
+}
+a {
+  text-decoration: none;
+  color: #1aade8;
+  padding-left: 3px;
+}

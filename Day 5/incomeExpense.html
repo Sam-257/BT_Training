@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="incomeExpense.css">
+    <title>Income Expense</title>
+</head>
+<body>
+    <div class="container">
+        <div class="form">
+            <select name="form__incomeExpense" id="incomeExpense">
+                <option value="+">+</option>
+                <option value="-">-</option>
+            </select>
+            <input type="text" class="form__description" id="description" placeholder="Description">
+            <input type="number" class="form__amount" id="amount" placeholder="Amount">
+            <button class="form__add" id="add">
+                <img src="https://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-add-icon.png" alt=""> 
+                Add
+            </button>
+        </div>
+        <div class="content">
+            <section>
+                <h1>ALL INCOMES</h1>
+                <ul id="incomes">
+
+                </ul>
+            </section>
+            <section>
+                <div class="div__income">INCOME <div id="displayIncome"></div></div>
+                <div class="div__moneyLeft">MONEY LEFT <div id="displayMoney"></div> </div>
+                <div class="div__expense">EXPENSE <div id="displayExpense"></div> </div>
+            </section>
+            <section>
+                <h1>ALL EXPENSES</h1>
+                <ul id="expenses">
+
+                </ul>
+            </section>
+        </div>
+    </div>
+</body>
+<script src="incomeExpense.js"></script>
+</html>
