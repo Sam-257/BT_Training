@@ -1,0 +1,2536 @@
+App.js
+--------
+// Statement
+let myname = 'MIKE TYSON';
+console.log(myname)
+let age = 34;
+let isAdmin = false;
+console.log(age)
+console.log(isAdmin)
+let colors = ['Red','Green','blue']
+console.log(colors)
+let person = { name:'Mike', age: 34}
+console.log(person)
+let employee = [
+    { id:101, name:'PETER'},
+    { id:101, name:'PETER'},
+    { id:101, name:'PETER'},
+]
+console.log(employee)
+--------------------------------------
+
+
+
+
+// alert('Hacked')
+/* let firstnumber = prompt('Enter First Number');
+alert(parseInt(firstnumber)+parseInt(firstnumber));
+ */
+// document.getElementById('id')
+/* let pRef = document.getElementById('para1')
+console.log(pRef.innerHTML);
+
+document.write(pRef.innerHTML) */
+
+// Number, String
+let money = 2345.555 //Number Object
+document.write(money.toFixed(2))
+
+let myname = 'Peter'; //string Object
+document.write(myname.length)
+document.write('<br>');
+document.write(myname.toLowerCase());
+document.write('<br>');
+document.write(myname.toUpperCase())
+
+let today = new Date()
+document.write(today.getFullYear())
+document.write('<br>');
+document.write(today.getDay())
+document.write('<br>');
+document.write(today.getMinutes())
+
+
+let taxValue = document.querySelector('#tax')
+document.write(taxValue.value)
+taxValue.focus()
+
+
+// Operator
+// ------------
+
+/* Relational Operator
+---------------------- */
+/* ==, >, >= ,< ,<= */
+
+// Logical Operator
+// ! , && , ||
+
+// Conditional Statement
+// if , if..else , if..elseif
+
+// Ternary Opertor
+//  condition? true: false
+
+// Loop
+// for, while, do.while, forEach, for..of, for..in
+
+/* let colors = ['red','green','blue'];
+document.write('<br>')
+for(let c in colors){
+    document.write(colors[c])
+}
+document.write('<br>')
+for(let c of colors){
+    document.write(c)
+}
+ */
+
+
+// Function
+let c = function(){
+    alert('Welcome')
+};
+
+c();
+
+function PrintData(){
+    alert('Welcome')
+}
+PrintData()
+
+// 
+
+
+let $ = function(id){
+   return document.getElementById(id)
+}
+
+console.log($('para1').innerHTML)
+
+
+
+
+
+
+
+
+-------------------------------------------------
+  
+  function login(){
+    alert('Passed')
+}
+
+// document.getElementById('loginBtn').onclick = login
+
+
+/* document.getElementById('loginBtn').onclick = function(){
+       alert('Passed')
+}
+ */
+
+document.getElementById('loginBtn').addEventListener('click',login)
+
+--------------------------------------------------------
+function total(){
+   
+ let tdRef = document.querySelectorAll('td')
+ let output = 0
+ for(let index=1 ; index<tdRef.length-1; index+=2){
+    output+= parseInt(tdRef[index].innerHTML)
+ }
+ document.querySelector('#result').innerHTML = output
+}
+
+--------------------------------
+Day3
+--------
+index.html
+---
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+    <p>
+        Accept or decline the web site privacy policy
+    </p> 
+    <p>
+        <input type="radio" onchange="showSelection()" name="policy" id="policy_accept" value="accept">Accept
+    </p>
+    <p>
+        <input type="radio" onchange="showSelection()" name="policy" id="policy_decline"  value="decline">Decline
+    </p>
+
+     <p>
+        <input type="checkbox" onchange="agree()" name="accept" id="accept" value="accept">
+        I accept the web site privacy policy
+     </p>
+    
+      <select name="contact" id="contact" onchange="showContact()">
+         <option value="phone">Phone</option>
+         <option value="email">Email</option>
+         <option value="sms">SMS</option>
+      </select>
+      
+      <p>Please Enter you comment on this article</p>
+      <p>
+        <textarea name="comment" id="comment" cols="30" rows="7"></textarea>
+      </p>
+      <button onclick="checkComment()">Send</button>
+
+
+
+     <span id="output"></span>
+    
+    
+     <script src="JS/app.js"></script>
+
+</body>
+</html>
+
+-----
+app.js
+----
+/* let age = prompt('Please enter your age')
+
+if(age == null){
+     alert('You clicked on cancel')
+}
+else{
+    age = parseInt(age)
+    if(isNaN(age)){
+        alert('you did not enter a number')
+    }
+    else if(age>=18){
+      alert('You can vote')
+    }
+    else{
+        alert('You can not vote')
+    }
+} */
+
+
+
+// Confirm
+/* let response = confirm('Do you want to agree?')
+if(response){
+     alert('Thank you')
+}
+else{
+     alert('You can not use our policy')
+} */
+
+
+// How to get the state of radio button
+
+let $ = function(id){return document.getElementById(id)}
+
+function showSelection(){
+    let status='unknown';
+    if($('policy_accept').checked){
+        status = $('policy_accept').value
+    }
+    if($('policy_decline').checked){
+        status = $('policy_decline').value
+    }
+    
+    if(status=="unknown"){
+        $('output').innerHTML = 'You must accept or decline the privacy policy'
+    }
+    else if(status=='accept'){
+         $('output').innerHTML = 'Thank you'
+    }
+    else{
+        $('output').innerHTML = 'You can not use the web store'
+    }
+}
+
+function agree(){
+   let accept =  $('accept').checked
+   if(accept){
+      $('output').innerHTML = 'Thank you'
+   }
+   else{
+      $('output').innerHTML = 'You can not use the web store'
+   }
+}
+
+// DropDown
+ function showContact(){
+     let contact = $('contact').value
+     if(contact=="phone"){
+        $('output').innerHTML = 'Contact Method : Phone'
+     }
+     else if(contact=="email"){
+        $('output').innerHTML = 'Contact Method : Email'
+    }
+    else if(contact=="sms"){
+        $('output').innerHTML = 'Contact Method : SMS'
+     }
+} 
+
+// TextArea
+function checkComment(){
+    let comment = $('comment').value
+    let charCount = comment.length
+    if(comment ==""){
+       $('output').innerHTML = 'Please Enter Comment'
+    }
+    else{
+       $('output').innerHTML = 'Your comment is '+ charCount+" \n "+ comment
+    }
+}
+
+-----------------
+  Example
+
+index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <p>Select the policies you agree with.</p>
+     <p><input type="checkbox" name="privacy" id="privacy"> Privacy Policy</p>
+     <p><input type="checkbox" name="use" id="use"> Acceptable user Policy</p>
+     <p><input type="checkbox" name="license" id="license"> End User License Agreement</p>
+     
+     <textarea name="policies" id="policies" cols="60" rows="10"></textarea>
+
+
+
+
+     <script src="../JS/checkBox.js"></script>
+</body>
+</html>
+
+
+app.js
+-------
+let $ = function(id){return document.getElementById(id)}
+
+function updatePolicies(){
+    console.log('inside function')
+
+   let privacy = $('privacy').checked
+   let use = $('use').checked
+   let license = $('license').checked
+   
+   let message = ''
+   
+   if(privacy || use || license){
+     message = "You agree to these policies \n\n"
+     if(privacy){
+         message += "- Privacy policy \n\n"
+     }
+     if(use){
+        message += "- Acceptable user Policy \n\n"
+    }
+    if(license){
+        message += "- End User License Agreement \n\n"
+    }
+   }
+   else{
+    message = "You have not agreed to these policies \n\n"
+   }
+   $('policies').value = message
+}
+
+
+window.onload = function(){
+    $('privacy').onchange = updatePolicies
+    $('use').onchange = updatePolicies
+    $('license').onchange = updatePolicies
+}
+  
+
+------
+Array
+---
+  // Array
+let names = ['Peter Parker', 'Mike Tyson','Rose Dawson'];
+console.log(names)
+console.log(names[0])
+
+// Add Element
+names[names.length] = 'Jasmine'
+console.log(names)
+// Add Element at specified index
+names[2] = 'Rock'
+console.log(names)
+
+// Delete element
+delete names[3]
+console.log(names)
+
+// for loop
+let numbers = [];
+for(let i=0; i<10; i++){
+       numbers[i] = i+1
+}
+let output = ''
+/* for(let i = 0;i<numbers.length;i++){
+      output+= numbers[i]+ ' '
+}
+alert(output) */
+
+//FOR..IN LOOP
+for(let index in numbers){
+    output+= numbers[index] + ' '
+}
+// alert(output)
+
+// Array Object Method
+// Add Element at the end
+    /* names.push('John Cena')
+    console.log(names) */
+// Add Element at the beginning
+    /* names.unshift('BottomLine')
+    console.log(names) */
+// Delete Element at the end
+    // names.pop()
+// console.log(names)
+// Delete Element at the beginning
+    /* names.shift()
+    console.log(names) */
+
+
+// Create Array from string
+    /* let fullname = "Ray L Harris";  
+    console.log(fullname)
+    let newName = fullname.split(' ')
+    console.log(newName) */
+
+
+
+// Associative Array :  string index
+// key  value 
+let item = []
+item['itemCode'] = 123
+item['itemName'] = 'Javascript 2022'
+item['itemCost'] = 54.44
+
+
+console.log(item)
+for(let index in item){
+     console.log(item[index]+'\n')
+}
+
+
+// Array of Arrays
+let myData = [];
+for(let i = 0;i<5;i++){
+     myData[i] = []
+}
+console.log(myData)
+
+for(let i = 0;i<5;i++){
+    for(let j=0;j<5;j++){
+        myData[i][j] = i*j
+    }
+}
+console.log(myData)
+
+
+------------------
+function
+// pass by value
+let add_timestamp = function(text){
+    let now = new Date()
+    text = text+ " "+now.toString();
+    // alert(text) // Error: value out of range+date
+}
+
+let msg = 'Error: value out of range';
+add_timestamp(msg)
+// alert(msg)//Error: value out of range
+
+
+// pass by reference
+
+let uppercase_first = function(x){
+   x[0] = x[0].toUpperCase()
+}
+let fruits = ['mango','orange']
+// console.log(fruits[0])
+uppercase_first(fruits)
+// console.log(fruits[0])
+
+
+// 
+function add_number(){
+    let output = 0
+    for(let i=0; i< arguments.length;i++){
+        output+=arguments[i]
+    }
+    return output
+}
+
+let result = add_number(10,20,30,40,50,60)
+console.log(result)
+
+closure
+----
+// closure
+function greeting(){
+     let message = 'Hi';
+     function sayHi(){
+        console.log(message)
+     }
+
+    return sayHi
+}
+
+let hi = greeting()
+hi()
+
+
+Invoice Example
+---------
+  var invoice = []
+let $ = function(id){return document.getElementById(id)}
+
+window.onload = function(){
+      $('item_add').onclick = item_add_click
+      $('item_code').focus()
+}
+function item_add_click(){
+    let item = []
+    item['item_code'] = $('item_code').value
+    item['item_name'] = $('item_name').value
+    item['item_cost'] = $('item_cost').value
+    item['item_qty'] = $('item_qty').value
+    invoice.push(item)
+    display()
+}
+
+function display(){
+   $('itemList').innerHTML = get_item_list(invoice)
+   $('sub_total').value = get_subtotal(invoice)
+   $('sales_tax').value = get_sales_tax(invoice)
+   $('total').value = get_total(invoice)
+
+}
+
+function get_item_list(item_list){
+    let list='';
+     for(let i in item_list){
+        list+="<tr><td>"+ item_list[i]["item_code"]+"</td><td>"+ item_list[i]["item_name"]+"</td><td>"+ item_list[i]["item_cost"]+"</td><td>"+ item_list[i]["item_qty"]+"</td><td>"+ item_list[i]["item_qty"]*item_list[i]["item_cost"]+"</td></tr>"
+     }
+     return list
+}
+
+function get_subtotal(item_list){
+    let sub_total=0, line_cost
+    for(let i in item_list){
+      line_cost = item_list[i]['item_qty']* item_list[i]['item_cost']
+      sub_total +=parseFloat(line_cost.toFixed(2))
+   }
+   return sub_total
+}
+function get_sales_tax(item_list){
+     let sub_total = get_subtotal(item_list)
+     let sales_tax = sub_total * 0.07
+     return parseFloat(sales_tax.toFixed(2))
+}
+function get_total(item_list){
+    let total = get_subtotal(item_list) + get_sales_tax(item_list)
+    return parseFloat(total.toFixed(2))
+}
+
+
+----
+
+//Using Object Approach
+// ----
+let $ = function(id){return document.getElementById(id)}
+
+let Invoice = function(){
+    this.items=[]
+    this.tax_rate=0.07
+}
+
+let Item_info = function(item_code,item_name, item_cost, item_qty){
+    this.item_name = item_name
+    this.item_cost = item_cost
+    this.item_qty = item_qty
+    this.item_code = item_code
+
+}
+window.onload = function(){
+      $('item_add').onclick = item_add_click
+      $('item_code').focus()
+}
+Invoice.prototype.add_item = function( item_info){
+  
+     if(item_code in this.items){
+         delete this.item[item_code]
+     }
+     this.items.push(item_info)
+     return this
+}
+var invoice = new Invoice()
+
+function item_add_click(){   
+   let item_code = $('item_code').value
+   let item_name = $('item_name').value
+   let item_cost = $('item_cost').value
+    let  item_qty = $('item_qty').value
+    
+     let item_info =  new Item_info(item_code,item_name,item_cost,item_qty)
+     invoice.add_item(item_info)
+     display()
+}
+
+function display(){
+   $('itemList').innerHTML = invoice.get_item_list()
+   $('sub_total').value = invoice.get_subtotal()
+   $('sales_tax').value = invoice.get_sales_tax()
+   $('total').value = invoice.get_total()
+
+}
+
+Invoice.prototype.get_item_list = function(){
+    let list='';
+    console.log(this.items)
+     for(let i in this.items){
+        list+="<tr><td>"+ this.items[i]["item_code"]+"</td><td>"+ this.items[i]["item_name"]+"</td><td>"+ this.items[i]["item_cost"]+"</td><td>"+ this.items[i]["item_qty"]+"</td><td>"+ this.items[i]["item_qty"]*this.items[i]["item_cost"]+"</td></tr>"
+     }
+     return list
+}
+
+Invoice.prototype.get_subtotal= function(){
+    let sub_total=0, line_cost
+    for(let i in this.items){
+      line_cost = this.items[i]['item_qty']* this.items[i]['item_cost']
+      sub_total +=parseFloat(line_cost.toFixed(2))
+   }
+   return sub_total
+}
+Invoice.prototype.get_sales_tax= function(){
+     let sub_total = this.get_subtotal()
+     let sales_tax = sub_total * 0.07
+     return parseFloat(sales_tax.toFixed(2))
+}
+Invoice.prototype.get_total= function(){
+    let total = this.get_subtotal() + this.get_sales_tax()
+    return parseFloat(total.toFixed(2))
+}
+
+
+Day4
+
+---Exception Handling------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<!--     <script>
+         function num(n){
+             if(n>3){
+                throw new Error('Value must be greater than 3')
+             }
+         }
+         try{
+            num(12)
+         }
+         catch(e){
+            console.log(e.message)
+         }
+       
+
+    </script> -->
+     
+    <h4>Enter the Value</h4>
+ <p>
+    Value1:  <input type="text" id="t1">
+ </p>
+ <p>
+    Value2:  <input type="text" id="t2">
+ </p>
+  
+  <button id="btnCheck">Check</button>
+   
+  <script>
+        document.getElementById('btnCheck').onclick = function(){
+             let v1 = parseInt(document.querySelector('#t1').value)
+             let v2 = parseInt(document.querySelector('#t2').value)
+            
+             try{                          
+                if(v2==0){
+                    throw new Error("Divisor is Zero")
+                }
+                else if(v1==0){
+                    throw new Error('To be divided is Zero')
+                }
+                else{
+                    let res = v1/v2
+                    console.log(res)
+                }
+                
+             }
+             catch(e){
+                console.log(e.message)
+             }
+        }
+  </script>
+</body>
+</html>
+
+
+-----
+    Dom Scripting
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img id="imageList" src="" alt="">
+    
+    <div id="divContainer">
+         <h1>INDIA</h1>
+         <h2>DUBAI</h2>
+     </div>
+    
+    <script>
+         let element = document.getElementById('imageList')
+         if(element.nodeType== 1){
+             console.log('imageList is an Element Node')
+         }
+         
+         let divElement = document.getElementById('divContainer')
+         let result = ''
+         for(let i=0 ; i<divElement.childNodes.length; i++){
+               let node = divElement.childNodes[i]
+               result+= node.nodeName +"\n"
+         }
+         console.log(result)
+
+         let imgElement = document.getElementById('imageList')
+         if(imgElement.hasChildNodes()){
+             console.log('imageList has Child Node')
+         }
+
+         if(imgElement.hasAttributes()){
+             console.log('imageList has attribute')
+         }
+
+
+    </script>
+</body>
+</html>
+
+  
+
+-----Element------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <a href="">Home</a>
+     <a href="">About</a>
+     <a href="">Product</a>
+
+     <img src="home.html" id="imageHome" alt="home_image" class="img1">
+    
+    <script>
+         let links = document.getElementsByTagName('a')
+         for(let i = 0;i <links.length;i++){
+            console.log(links[i].nodeType+'\n')
+         } 
+         
+         let imgHome = document.getElementById('imageHome')
+         console.log("Tag Name : "+imgHome.tagName) 
+
+         if(imgHome.hasAttribute('class')){
+              console.log("Class: "+ imgHome.getAttribute('class'))
+         }
+         imgHome.setAttribute('class','img2')
+         imgHome.removeAttribute('class')
+
+         for(let i=0;i<imgHome.attributes.length;i++){
+            console.log(imgHome.attributes[i].name+" :"+imgHome.attributes[i].value )
+         }  
+    </script>
+</body>
+</html>
+
+
+
+--------Timer------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <button id="cancel_click">Cancel Timer</button>
+    <!--  <script>
+         let timer;
+         window.onload = function(){
+           timer =  setTimeout(displayDate,2000)
+           document.getElementById('cancel_click').onclick = cancel_click
+         }
+
+         let displayDate = function(){
+              let now = new Date()
+              console.log(now)
+              return now
+         }
+
+         let cancel_click = function(){
+            clearTimeout(timer)
+            console.log('The Timer has been cancelled')
+            console.log(timer)
+         }
+     </script> -->
+
+     <script>
+        let timer, counter=0;
+        window.onload = function(){
+          timer =  setInterval(displayDate,2000)
+          document.getElementById('cancel_click').onclick = cancel_click
+        }
+
+        let displayDate = function(){
+            counter++
+            console.log(counter)
+        }
+
+        let cancel_click = function(){
+           clearInterval(timer)
+           console.log('The Timer has been cancelled')
+        
+        }
+    </script>
+</body>
+</html>
+
+        
+--------Image Slider----------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <img src="" alt="" id="container">
+    <script>
+          let imgList = ['image1.jpeg','image2.jeg','image3.jpeg']
+
+          function slideImage(){
+             let i = 0
+             document.getElementById('container').src = imgList[i]
+             if(i <  imgList.length-1){
+                 i++
+             }
+             else{
+                 i = 0
+             }
+             setInterval(slideImage,2000)
+          }
+          window.onload = slideImage
+          
+    </script>
+</body>
+</html>
+
+
+-----Array Of Object------
+
+Example
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="venue">
+        <li>Room A</li>
+        <li>Room B</li>
+        
+    </ul>
+    <script>
+           let liNode =  document.createElement('li') //<li></li>
+           liNode.innerHTML = 'ROOM C' //<li>ROOM C</li>
+           document.querySelector('#venue').appendChild(liNode)
+
+           document.querySelector('#venue').removeChild( document.querySelector('#venue').lastChild)
+    </script>
+</body>
+</html>
+---------------------------------------------
+ Dummy Data
+[
+  {
+    "postId": 1,
+    "id": 1,
+    "name": "id labore ex et quam laborum",
+    "email": "Eliseo@gardner.biz",
+    "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
+  },
+  {
+    "postId": 1,
+    "id": 2,
+    "name": "quo vero reiciendis velit similique earum",
+    "email": "Jayne_Kuhic@sydney.com",
+    "body": "est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et"
+  },
+  {
+    "postId": 1,
+    "id": 3,
+    "name": "odio adipisci rerum aut animi",
+    "email": "Nikita@garfield.biz",
+    "body": "quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione"
+  },
+  {
+    "postId": 1,
+    "id": 4,
+    "name": "alias odio sit",
+    "email": "Lew@alysha.tv",
+    "body": "non et atque\noccaecati deserunt quas accusantium unde odit nobis qui voluptatem\nquia voluptas consequuntur itaque dolor\net qui rerum deleniti ut occaecati"
+  },
+  {
+    "postId": 1,
+    "id": 5,
+    "name": "vero eaque aliquid doloribus et culpa",
+    "email": "Hayden@althea.biz",
+    "body": "harum non quasi et ratione\ntempore iure ex voluptates in ratione\nharum architecto fugit inventore cupiditate\nvoluptates magni quo et"
+  },
+  {
+    "postId": 2,
+    "id": 6,
+    "name": "et fugit eligendi deleniti quidem qui sint nihil autem",td
+    "email": "Presley.Mueller@myrl.com",
+    "body": "doloribus at sed quis culpa deserunt consectetur qui praesentium\naccusamus fugiat dicta\nvoluptatem rerum ut voluptate autem\nvoluptatem repellendus aspernatur dolorem in"
+  },
+  {
+    "postId": 2,
+    "id": 7,
+    "name": "repellat consequatur praesentium vel minus molestias voluptatum",
+    "email": "Dallas@ole.me",
+    "body": "maiores sed dolores similique labore et inventore et\nquasi temporibus esse sunt id et\neos voluptatem aliquam\naliquid ratione corporis molestiae mollitia quia et magnam dolor"
+  },
+  {
+    "postId": 2,
+    "id": 8,
+    "name": "et omnis dolorem",
+    "email": "Mallory_Kunze@marie.org",
+    "body": "ut voluptatem corrupti velit\nad voluptatem maiores\net nisi velit vero accusamus maiores\nvoluptates quia aliquid ullam eaque"
+  },
+  {
+    "postId": 2,
+    "id": 9,
+    "name": "provident id voluptas",
+    "email": "Meghan_Littel@rene.us",
+    "body": "sapiente assumenda molestiae atque\nadipisci laborum distinctio aperiam et ab ut omnis\net occaecati aspernatur odit sit rem expedita\nquas enim ipsam minus"
+  },
+  {
+    "postId": 2,
+    "id": 10,
+    "name": "eaque et deleniti atque tenetur ut quo ut",
+    "email": "Carmen_Keeling@caroline.name",
+    "body": "voluptate iusto quis nobis reprehenderit ipsum amet nulla\nquia quas dolores velit et non\naut quia necessitatibus\nnostrum quaerat nulla et accusamus nisi facilis"
+  },
+  ]
+
+   https://randomuser.me/api/?results=10
+
+const data = 
+{
+    "results": [
+      {
+        "gender": "male",
+        "name": {
+          "title": "Mr",
+          "first": "Novak",
+          "last": "Spajić"
+        },
+        "location": {
+          "street": {
+            "number": 8328,
+            "name": "Ljubisava Šarčevića"
+          },
+          "city": "Bečej",
+          "state": "Toplica",
+          "country": "Serbia",
+          "postcode": 25381,
+          "coordinates": {
+            "latitude": "62.1446",
+            "longitude": "-34.8602"
+          },
+          "timezone": {
+            "offset": "-5:00",
+            "description": "Eastern Time (US & Canada), Bogota, Lima"
+          }
+        },
+        "email": "novak.spajic@example.com",
+        "login": {
+          "uuid": "9b4d71e2-3e46-4a74-8cda-66726137c5bb",
+          "username": "ticklishostrich438",
+          "password": "running",
+          "salt": "m3pyOBrq",
+          "md5": "ba7a3ec27eda9c71999df04d811e990f",
+          "sha1": "fbf0ffef77bd427ab1e5f61ca0a165aa6968654e",
+          "sha256": "44397dabbcf45b08f0198cf234308eaa85258357417153eaa428a089f0cf8307"
+        },
+        "dob": {
+          "date": "1966-02-28T02:30:55.109Z",
+          "age": 56
+        },
+        "registered": {
+          "date": "2012-02-01T16:03:19.392Z",
+          "age": 10
+        },
+        "phone": "021-1473-776",
+        "cell": "069-2260-836",
+        "id": {
+          "name": "SID",
+          "value": "843494143"
+        },
+        "picture": {
+          "large": "https://randomuser.me/api/portraits/men/13.jpg",
+          "medium": "https://randomuser.me/api/portraits/med/men/13.jpg",
+          "thumbnail": "https://randomuser.me/api/portraits/thumb/men/13.jpg"
+        },
+        "nat": "RS"
+      },
+      {
+        "gender": "male",
+        "name": {
+          "title": "Mr",
+          "first": "Lester",
+          "last": "Bowman"
+        },
+        "location": {
+          "street": {
+            "number": 5524,
+            "name": "Northaven Rd"
+          },
+          "city": "Mackay",
+          "state": "Australian Capital Territory",
+          "country": "Australia",
+          "postcode": 7132,
+          "coordinates": {
+            "latitude": "27.7824",
+            "longitude": "167.7939"
+          },
+          "timezone": {
+            "offset": "+11:00",
+            "description": "Magadan, Solomon Islands, New Caledonia"
+          }
+        },
+        "email": "lester.bowman@example.com",
+        "login": {
+          "uuid": "43a0d5ad-757f-4737-8059-1f88800adcfe",
+          "username": "beautifulfish452",
+          "password": "number",
+          "salt": "M1W94NHY",
+          "md5": "c74352c9fd2e1860be8058769166db07",
+          "sha1": "1be6f7efe7b52ba2a367169e40eea219066fdaf7",
+          "sha256": "cc3cc644541e551b38210640755d0cbb654de2d98c0b45f0b4bf1c675d2263de"
+        },
+        "dob": {
+          "date": "1964-11-27T19:08:47.455Z",
+          "age": 57
+        },
+        "registered": {
+          "date": "2006-01-02T05:34:47.978Z",
+          "age": 16
+        },
+        "phone": "01-5926-4678",
+        "cell": "0419-839-298",
+        "id": {
+          "name": "TFN",
+          "value": "859789019"
+        },
+        "picture": {
+          "large": "https://randomuser.me/api/portraits/men/44.jpg",
+          "medium": "https://randomuser.me/api/portraits/med/men/44.jpg",
+          "thumbnail": "https://randomuser.me/api/portraits/thumb/men/44.jpg"
+        },
+        "nat": "AU"
+      },
+      {
+        "gender": "male",
+        "name": {
+          "title": "Mr",
+          "first": "Vedant",
+          "last": "Gugale"
+        },
+        "location": {
+          "street": {
+            "number": 9094,
+            "name": "Dwaraka Nagar"
+          },
+          "city": "Jammu",
+          "state": "Haryana",
+          "country": "India",
+          "postcode": 99989,
+          "coordinates": {
+            "latitude": "25.5340",
+            "longitude": "15.0789"
+          },
+          "timezone": {
+            "offset": "+5:30",
+            "description": "Bombay, Calcutta, Madras, New Delhi"
+          }
+        },
+        "email": "vedant.gugale@example.com",
+        "login": {
+          "uuid": "ca046537-29f3-4a7a-bd2f-d5f3edc8fcee",
+          "username": "lazyfrog111",
+          "password": "scooter1",
+          "salt": "YY6WJRCb",
+          "md5": "d1aec9ad8185aac334b471eef5a3bd7d",
+          "sha1": "a737b868659c6b8cfc63895f1a6e9ab50da15433",
+          "sha256": "a2c17f700cc49f249272746f423b8f8f396cf4c09310f60b12dccdad986f4ffd"
+        },
+        "dob": {
+          "date": "1946-10-02T09:18:13.325Z",
+          "age": 75
+        },
+        "registered": {
+          "date": "2007-05-31T12:34:52.933Z",
+          "age": 15
+        },
+        "phone": "7647266401",
+        "cell": "8779001580",
+        "id": {
+          "name": "UIDAI",
+          "value": "709482725338"
+        },
+        "picture": {
+          "large": "https://randomuser.me/api/portraits/men/70.jpg",
+          "medium": "https://randomuser.me/api/portraits/med/men/70.jpg",
+          "thumbnail": "https://randomuser.me/api/portraits/thumb/men/70.jpg"
+        },
+        "nat": "IN"
+      },
+      {
+        "gender": "male",
+        "name": {
+          "title": "Mr",
+          "first": "Ajay",
+          "last": "Babu"
+        },
+        "location": {
+          "street": {
+            "number": 3779,
+            "name": "Marine Drive"
+          },
+          "city": "Katihar",
+          "state": "Madhya Pradesh",
+          "country": "India",
+          "postcode": 96299,
+          "coordinates": {
+            "latitude": "-79.2502",
+            "longitude": "-108.6480"
+          },
+          "timezone": {
+            "offset": "-9:00",
+            "description": "Alaska"
+          }
+        },
+        "email": "ajay.babu@example.com",
+        "login": {
+          "uuid": "fb86f5be-465f-4cde-89b7-0c85004b2a6c",
+          "username": "lazypeacock292",
+          "password": "tracey",
+          "salt": "GedZU2W0",
+          "md5": "05605dadc8e997479dffcd6b30dbf578",
+          "sha1": "6ce9a1c5128583026eedbf07d1f0dab246676b30",
+          "sha256": "881b8df1149b26be5d9af5bc2324c85fc1b9026df0b1c02186b7f0fd7cd2d055"
+        },
+        "dob": {
+          "date": "1962-12-05T06:39:00.534Z",
+          "age": 59
+        },
+        "registered": {
+          "date": "2014-03-24T06:36:22.928Z",
+          "age": 8
+        },
+        "phone": "9116744670",
+        "cell": "9476265858",
+        "id": {
+          "name": "UIDAI",
+          "value": "276577914719"
+        },
+        "picture": {
+          "large": "https://randomuser.me/api/portraits/men/53.jpg",
+          "medium": "https://randomuser.me/api/portraits/med/men/53.jpg",
+          "thumbnail": "https://randomuser.me/api/portraits/thumb/men/53.jpg"
+        },
+        "nat": "IN"
+      },
+      {
+        "gender": "female",
+        "name": {
+          "title": "Ms",
+          "first": "Alejandra",
+          "last": "Marrero"
+        },
+        "location": {
+          "street": {
+            "number": 9257,
+            "name": "Cerrada Lugo"
+          },
+          "city": "Chontla",
+          "state": "Queretaro",
+          "country": "Mexico",
+          "postcode": 78508,
+          "coordinates": {
+            "latitude": "-39.6615",
+            "longitude": "53.9444"
+          },
+          "timezone": {
+            "offset": "+4:00",
+            "description": "Abu Dhabi, Muscat, Baku, Tbilisi"
+          }
+        },
+        "email": "alejandra.marrero@example.com",
+        "login": {
+          "uuid": "b612accf-0018-4d1b-8f7d-3b3844c84111",
+          "username": "beautifulgorilla217",
+          "password": "real",
+          "salt": "HJx7Whj4",
+          "md5": "f2fc83007e71f41c54d89a1defeacc70",
+          "sha1": "5ab022935eb061ba1207f14e5d06f121245ddcce",
+          "sha256": "aceb9ce9c081ad048d3f17d18fda3f3a655557ef58f0cfae8f8ab7ec82004224"
+        },
+        "dob": {
+          "date": "1987-07-01T05:40:58.064Z",
+          "age": 35
+        },
+        "registered": {
+          "date": "2022-02-02T02:34:51.992Z",
+          "age": 0
+        },
+        "phone": "(614) 876 1850",
+        "cell": "(608) 983 1969",
+        "id": {
+          "name": "NSS",
+          "value": "22 33 06 8685 3"
+        },
+        "picture": {
+          "large": "https://randomuser.me/api/portraits/women/20.jpg",
+          "medium": "https://randomuser.me/api/portraits/med/women/20.jpg",
+          "thumbnail": "https://randomuser.me/api/portraits/thumb/women/20.jpg"
+        },
+        "nat": "MX"
+      },
+      {
+        "gender": "male",
+        "name": {
+          "title": "Mr",
+          "first": "William",
+          "last": "Christiansen"
+        },
+        "location": {
+          "street": {
+            "number": 1321,
+            "name": "Agertoften"
+          },
+          "city": "Branderup J",
+          "state": "Midtjylland",
+          "country": "Denmark",
+          "postcode": 93458,
+          "coordinates": {
+            "latitude": "-21.9885",
+            "longitude": "5.4239"
+          },
+          "timezone": {
+            "offset": "-2:00",
+            "description": "Mid-Atlantic"
+          }
+        },
+        "email": "william.christiansen@example.com",
+        "login": {
+          "uuid": "78f810db-dcfe-47b3-998f-32ac76bb1d7b",
+          "username": "sadgorilla928",
+          "password": "1226",
+          "salt": "DtHGggl5",
+          "md5": "4c6f001204ee102bb1fcef1239d7e799",
+          "sha1": "6226057350bc172025d1fcb6069fbba2daf3e6b1",
+          "sha256": "667d8ae6719882534fe486a92265c540ffa37ed19d0c961d97dc0f9917ee3288"
+        },
+        "dob": {
+          "date": "1971-10-06T06:10:43.740Z",
+          "age": 50
+        },
+        "registered": {
+          "date": "2015-04-14T04:20:11.686Z",
+          "age": 7
+        },
+        "phone": "68335985",
+        "cell": "48906635",
+        "id": {
+          "name": "CPR",
+          "value": "061071-5318"
+        },
+        "picture": {
+          "large": "https://randomuser.me/api/portraits/men/70.jpg",
+          "medium": "https://randomuser.me/api/portraits/med/men/70.jpg",
+          "thumbnail": "https://randomuser.me/api/portraits/thumb/men/70.jpg"
+        },
+        "nat": "DK"
+      },
+      {
+        "gender": "male",
+        "name": {
+          "title": "Mr",
+          "first": "Randall",
+          "last": "Newman"
+        },
+        "location": {
+          "street": {
+            "number": 2443,
+            "name": "The Grove"
+          },
+          "city": "Kilkenny",
+          "state": "Monaghan",
+          "country": "Ireland",
+          "postcode": 20807,
+          "coordinates": {
+            "latitude": "31.8485",
+            "longitude": "-82.5371"
+          },
+          "timezone": {
+            "offset": "+8:00",
+            "description": "Beijing, Perth, Singapore, Hong Kong"
+          }
+        },
+        "email": "randall.newman@example.com",
+        "login": {
+          "uuid": "a9d8e3ba-8bcf-417b-bfae-08c9e42ac896",
+          "username": "bluemouse254",
+          "password": "daisy1",
+          "salt": "Fd863y47",
+          "md5": "a3473eaa381f4372b47e7477477b1fc4",
+          "sha1": "10242c9226a187172d1c08153ff51a39a0eb1031",
+          "sha256": "41700fe4ee0c6608945b775c98703a00f88436951cc9402c32352e22c5ed290b"
+        },
+        "dob": {
+          "date": "1992-10-07T06:39:48.613Z",
+          "age": 29
+        },
+        "registered": {
+          "date": "2020-06-18T07:47:44.752Z",
+          "age": 2
+        },
+        "phone": "041-278-9453",
+        "cell": "081-745-1712",
+        "id": {
+          "name": "PPS",
+          "value": "7536175T"
+        },
+        "picture": {
+          "large": "https://randomuser.me/api/portraits/men/91.jpg",
+          "medium": "https://randomuser.me/api/portraits/med/men/91.jpg",
+          "thumbnail": "https://randomuser.me/api/portraits/thumb/men/91.jpg"
+        },
+        "nat": "IE"
+      },
+      {
+        "gender": "male",
+        "name": {
+          "title": "Mr",
+          "first": "Mikael",
+          "last": "Kallio"
+        },
+        "location": {
+          "street": {
+            "number": 3477,
+            "name": "Nordenskiöldinkatu"
+          },
+          "city": "Kustavi",
+          "state": "Tavastia Proper",
+          "country": "Finland",
+          "postcode": 47426,
+          "coordinates": {
+            "latitude": "78.6651",
+            "longitude": "99.7492"
+          },
+          "timezone": {
+            "offset": "-7:00",
+            "description": "Mountain Time (US & Canada)"
+          }
+        },
+        "email": "mikael.kallio@example.com",
+        "login": {
+          "uuid": "22eb162c-f327-4cca-ac81-1dfd42f9f435",
+          "username": "orangeelephant116",
+          "password": "team",
+          "salt": "WTJIFgeH",
+          "md5": "35d489f659c8e572e706b33bf7db8021",
+          "sha1": "c378d4496829b9339d5be3d92ced450f3ee356e5",
+          "sha256": "1a99daa42fd9411a79193e7941026038f56dcf9cb13e7041d1cd6e4e13b39288"
+        },
+        "dob": {
+          "date": "1950-11-01T01:46:29.150Z",
+          "age": 71
+        },
+        "registered": {
+          "date": "2006-03-20T18:05:15.104Z",
+          "age": 16
+        },
+        "phone": "05-512-891",
+        "cell": "045-417-71-19",
+        "id": {
+          "name": "HETU",
+          "value": "NaNNA277undefined"
+        },
+        "picture": {
+          "large": "https://randomuser.me/api/portraits/men/93.jpg",
+          "medium": "https://randomuser.me/api/portraits/med/men/93.jpg",
+          "thumbnail": "https://randomuser.me/api/portraits/thumb/men/93.jpg"
+        },
+        "nat": "FI"
+      },
+      {
+        "gender": "male",
+        "name": {
+          "title": "Mr",
+          "first": "Noa",
+          "last": "Brunvoll"
+        },
+        "location": {
+          "street": {
+            "number": 7101,
+            "name": "Steinbakken"
+          },
+          "city": "Skjeberg",
+          "state": "Sogn og Fjordane",
+          "country": "Norway",
+          "postcode": "2936",
+          "coordinates": {
+            "latitude": "-21.7561",
+            "longitude": "-172.4504"
+          },
+          "timezone": {
+            "offset": "-6:00",
+            "description": "Central Time (US & Canada), Mexico City"
+          }
+        },
+        "email": "noa.brunvoll@example.com",
+        "login": {
+          "uuid": "9ead8545-f162-4027-a758-8112e0b6e7ab",
+          "username": "goldenelephant208",
+          "password": "blackcat",
+          "salt": "wmbucNxW",
+          "md5": "ca42cc6bc3df6674b468b87cec650aa6",
+          "sha1": "6696152c497e11ee2ceef5460962f6b92351cddf",
+          "sha256": "a8af1b38670365f365c8cbeb619cba14895b45024080ec80d95d6eb9fb49f102"
+        },
+        "dob": {
+          "date": "1993-01-11T10:18:02.529Z",
+          "age": 29
+        },
+        "registered": {
+          "date": "2016-09-01T07:52:57.149Z",
+          "age": 6
+        },
+        "phone": "87662169",
+        "cell": "95064871",
+        "id": {
+          "name": "FN",
+          "value": "11019315985"
+        },
+        "picture": {
+          "large": "https://randomuser.me/api/portraits/men/30.jpg",
+          "medium": "https://randomuser.me/api/portraits/med/men/30.jpg",
+          "thumbnail": "https://randomuser.me/api/portraits/thumb/men/30.jpg"
+        },
+        "nat": "NO"
+      },
+      {
+        "gender": "male",
+        "name": {
+          "title": "Mr",
+          "first": "Ricky",
+          "last": "Harvey"
+        },
+        "location": {
+          "street": {
+            "number": 685,
+            "name": "Groveland Terrace"
+          },
+          "city": "Traralgon",
+          "state": "Western Australia",
+          "country": "Australia",
+          "postcode": 3639,
+          "coordinates": {
+            "latitude": "27.0632",
+            "longitude": "143.2841"
+          },
+          "timezone": {
+            "offset": "+5:00",
+            "description": "Ekaterinburg, Islamabad, Karachi, Tashkent"
+          }
+        },
+        "email": "ricky.harvey@example.com",
+        "login": {
+          "uuid": "548ee97d-e1aa-4599-81d7-5cad3e7a181f",
+          "username": "ticklishdog177",
+          "password": "yousuck",
+          "salt": "4GZ7FxY0",
+          "md5": "44fe3793151b5ae20f19cc0054258e23",
+          "sha1": "d9617749b96d6db0de1f209faa8492a898109b3d",
+          "sha256": "17a3235ecd03baa90b4c42843ccc5cb93a8a006feaeaa15f7c8fdcc75a5c489c"
+        },
+        "dob": {
+          "date": "1993-03-09T11:52:44.252Z",
+          "age": 29
+        },
+        "registered": {
+          "date": "2019-05-03T01:45:13.102Z",
+          "age": 3
+        },
+        "phone": "00-8006-8864",
+        "cell": "0438-622-513",
+        "id": {
+          "name": "TFN",
+          "value": "438963935"
+        },
+        "picture": {
+          "large": "https://randomuser.me/api/portraits/men/50.jpg",
+          "medium": "https://randomuser.me/api/portraits/med/men/50.jpg",
+          "thumbnail": "https://randomuser.me/api/portraits/thumb/men/50.jpg"
+        },
+        "nat": "AU"
+      }
+    ]
+   
+}
+
+
+function createElementByTag(tagname){
+    return document.createElement(tagname)
+}
+
+
+function printData(){
+     for(let i  in data['results']){
+           console.log('inside ')
+ 
+          let trNode = createElementByTag('tr')         
+         
+           let tdNode = createElementByTag('td')         
+
+          let tdNode1= createElementByTag('img')
+         
+
+          tdNode1.src = data['results'][i]['picture']['large']
+          tdNode.appendChild(tdNode1)
+          trNode.appendChild(tdNode)
+           
+          document.getElementById('tableData').appendChild(trNode)
+          
+     }
+}
+
+window.onload = printData()
+
+
+-------PROMISE-------
+  let passExam = false
+
+/* let res = new Promise(function(resolve,reject){
+       if(passExam){
+         resolve('Dad Gifted the new mobile')
+       }
+       else{
+        reject('Dad has not gifted the mobile')
+       }
+}) */
+
+/* let res = new Promise(function(resolve,reject){
+    setTimeout(function(){
+        if(passExam){
+            resolve('Dad Gifted the new mobile')
+          }
+          else{
+           reject('Dad has not gifted the mobile')
+          }
+    },1000)
+}) */
+
+
+function CheckPromise(passExam){
+   return  new Promise(function(resolve,reject){
+        setTimeout(function(){
+            if(passExam){
+                resolve('Dad Gifted the new mobile')
+              }
+              else{
+               reject('Dad has not gifted the mobile')
+              }
+        },1000)
+    })
+}
+let result = CheckPromise(false)
+result.then(function(response){
+        console.log(response)
+}) 
+.catch(function(reject){
+      console.log(reject)
+})
+
+
+////--
+let passExam = false
+
+/* let res = new Promise(function(resolve,reject){
+       if(passExam){
+         resolve('Dad Gifted the new mobile')
+       }
+       else{
+        reject('Dad has not gifted the mobile')
+       }
+}) */
+
+/* let res = new Promise(function(resolve,reject){
+    setTimeout(function(){
+        if(passExam){
+            resolve('Dad Gifted the new mobile')
+          }
+          else{
+           reject('Dad has not gifted the mobile')
+          }
+    },1000)
+}) */
+
+/* 
+function CheckPromise(passExam){
+   return  new Promise(function(resolve,reject){
+        setTimeout(function(){
+            if(passExam){
+                resolve('Dad Gifted the new mobile')
+              }
+              else{
+               reject('Dad has not gifted the mobile')
+              }
+        },1000)
+    })
+}
+let result = CheckPromise(false)
+result.then(function(response){
+        console.log(response)
+}) 
+.catch(function(reject){
+      console.log(reject)
+})
+ */
+/* 
+let res = new Promise(function(resolve,reject){
+     setTimeout(function(){
+         resolve(5)
+     },3000)
+})
+
+res.then(function(response){
+     console.log(response) //5
+     return response*2
+})
+.then(function(response){
+    console.log(response)//10
+    return response*3
+})
+.then(function(response){
+    console.log(response) //30,
+    return response*4
+})
+.then(function(response){
+    console.log(response) //120
+    return response*5
+}) */
+
+
+// Promise.all()
+/* 
+const promise1= new Promise(function(resolve,reject){
+     setTimeout(function(){
+        resolve(3)
+     },3000)
+})
+const promise2= new Promise(function(resolve,reject){
+    setTimeout(function(){
+       resolve(2)
+    },2000)
+})
+
+Promise.all([promise1,promise2]).then(function(result){
+    console.log(result)
+     console.log(result[0])
+     console.log(result[1])
+}) */
+
+
+// Async /Await
+
+function resolveAfter2Second(){
+     return new Promise(function(resolve){
+          setTimeout(function(){
+            resolve('resolved')
+          },2000)
+     })
+}
+
+async function asyncCall(){
+         console.log('calling')        
+        const result =   await resolveAfter2Second()
+        console.log(result)
+}
+
+asyncCall()
+
+
+//https://www.qubits42.com/live/10448
+
+ 
+-------AJAX ----------
+
+//npm install -g json-server  : install
+//json-server db.json  : start server
+
+let apiurl = 'http://localhost:3000/users'
+
+let xhr = new XMLHttpRequest()
+
+
+//  GET REQUEST
+
+xhr.open('GET',apiurl,true)
+
+xhr.onload = function(){
+       let users = JSON.parse(xhr.responseText)
+      if(xhr.status ==200){
+         console.log(users)
+         formatData(users)
+      }
+      else{
+         console.log(users)
+      }
+}
+xhr.send()
+
+function createElementByTag(tagname){
+    return document.createElement(tagname)
+}
+
+function formatData(users){
+   
+  for( let i in users){
+       let trNode = createElementByTag('tr')
+       let tdNode1 = createElementByTag('td')
+       let tdNode2= createElementByTag('td')
+       let tdNode3 = createElementByTag('td')
+       let tdNode4 = createElementByTag('td')
+       tdNode1.innerHTML = users[i]['id']
+       tdNode2.innerHTML = users[i]['name']
+       tdNode3.innerHTML = users[i]['username']
+       tdNode4.innerHTML = users[i]['email']
+       trNode.appendChild(tdNode1)
+       trNode.appendChild(tdNode2)
+       trNode.appendChild(tdNode3)
+       trNode.appendChild(tdNode4)
+       document.getElementById('tableData').appendChild(trNode)
+  }
+
+}
+
+
+// Post Request
+/* let data = {}
+data.name = 'PETER PARKER'
+data.email = 'peter@gmail.com'
+data.username = 'peter121345'
+let jsonData = JSON.stringify(data)
+
+xhr.open('POST',apiurl,true)
+xhr.setRequestHeader('Content-type','application/json')
+xhr.onload = function(){
+    let users = JSON.parse(xhr.responseText)
+    if(xhr.status ==200){
+       console.log(users)    
+    }
+    else{
+       console.log(users)
+    }
+}
+xhr.send(jsonData) */
+
+
+// PUT REQUEST
+/* 
+let data = {}
+data.name = 'MIKE TYSON'
+data.email = 'mike@gmail.com'
+data.username = 'mike121345'
+let jsonData = JSON.stringify(data)
+
+xhr.open('PUT',apiurl+'/'+6, true)
+xhr.setRequestHeader('Content-type','application/json')
+xhr.onload = function(){
+    let users = JSON.parse(xhr.responseText)
+    if(xhr.status ==200){
+       console.log(users)    
+    }
+    else{
+       console.log(users)
+    }
+}
+xhr.send(jsonData) */
+
+
+// Delete
+/* xhr.open('DELETE',apiurl+'/'+6, true)
+xhr.setRequestHeader('Content-type','application/json')
+xhr.onload = function(){
+    let users = JSON.parse(xhr.responseText)
+    if(xhr.status ==200){
+       console.log(users)    
+    }
+    else{
+       console.log(users)
+    }
+}
+xhr.send()  */
+
+
+----------Design UI----------
+
+index.html
+---
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Action(s)</th>
+            </tr>
+        </thead>
+        <tbody id="tableData">
+
+        </tbody>
+    </table>
+
+    <script src="xmlHttpRequest.js"></script>
+</body>
+</html>
+
+
+JS---PArt
+let apiurl = 'http://localhost:3000/users'
+
+let xhr = new XMLHttpRequest()
+
+
+//  GET REQUEST
+let users;
+xhr.open('GET',apiurl,true)
+
+xhr.onload = function(){
+      users = JSON.parse(xhr.responseText)
+      if(xhr.status ==200){
+         console.log(users)
+         formatData(users)
+      }
+      else{
+         console.log(users)
+      }
+}
+xhr.send()
+
+function createElementByTag(tagname){
+    return document.createElement(tagname)
+}
+
+function formatData(users){
+   
+  for( let i in users){
+       let trNode = createElementByTag('tr')
+       let tdNode1 = createElementByTag('td')
+       let tdNode2= createElementByTag('td')
+       let tdNode3 = createElementByTag('td')
+       let tdNode4 = createElementByTag('td')
+       let tdNode5 = createElementByTag('td')
+
+       let btnEdit = createElementByTag('button')
+       btnEdit.innerHTML = 'Edit'
+       btnEdit.setAttribute('data-id',parseInt(i)+1)
+
+       let btnDelete = createElementByTag('button')
+       btnDelete.innerHTML = 'Delete'
+
+       btnEdit.onclick = editRecord
+       
+       tdNode5.appendChild(btnEdit)
+       tdNode5.appendChild(btnDelete)      
+
+
+       tdNode1.innerHTML = users[i]['id']
+       tdNode2.innerHTML = users[i]['name']
+       tdNode3.innerHTML = users[i]['username']
+       tdNode4.innerHTML = users[i]['email']
+
+
+       trNode.appendChild(tdNode1)
+       trNode.appendChild(tdNode2)
+       trNode.appendChild(tdNode3)
+       trNode.appendChild(tdNode4)
+       trNode.appendChild(tdNode5)
+       document.getElementById('tableData').appendChild(trNode)
+  }
+
+}
+let input1 = createElementByTag('input')
+input1.setAttribute('id','name')
+let input2 = createElementByTag('input')
+input2.setAttribute('id','username')
+
+let input3 = createElementByTag('input')
+input3.setAttribute('id','email')
+
+let btnUpdate = createElementByTag('button')
+let id;
+function editRecord(event){
+       let singleRecord;
+       id = event.target.getAttribute('data-id')
+      xhr.open('GET',apiurl+'/'+id,true)
+
+      xhr.onload = function(){
+          singleRecord = JSON.parse(xhr.responseText)
+         
+          btnUpdate.innerHTML = 'Update'
+          input1.value = singleRecord.name
+          input2.value = singleRecord.username
+          input3.value = singleRecord.email
+          document.body.append(input1)
+          document.body.append(input2)
+          document.body.append(input3)
+          document.body.append(btnUpdate)
+          btnUpdate.onclick = updateRecord
+      }
+      xhr.send()
+
+    
+    
+
+
+    
+
+}
+
+
+// Post Request
+/* let data = {}
+data.name = 'PETER PARKER'
+data.email = 'peter@gmail.com'
+data.username = 'peter121345'
+let jsonData = JSON.stringify(data)
+
+xhr.open('POST',apiurl,true)
+xhr.setRequestHeader('Content-type','application/json')
+xhr.onload = function(){
+    let users = JSON.parse(xhr.responseText)
+    if(xhr.status ==200){
+       console.log(users)    
+    }
+    else{
+       console.log(users)
+    }
+}
+xhr.send(jsonData) */
+
+
+// PUT REQUEST
+
+function updateRecord(){
+    let data= {}
+   data.name=  document.getElementById('name').value
+   data.username= document.getElementById('username').value
+   data.email=document.getElementById('email').value
+
+    let jsonData = JSON.stringify(data)
+    xhr.open('PUT',apiurl+'/'+id, true)
+    xhr.setRequestHeader('Content-type','application/json')
+    xhr.onload = function(){
+        let users = JSON.parse(xhr.responseText)
+        if(xhr.status ==200){
+        console.log(users)    
+        }
+        else{
+        console.log(users)
+        }
+    }
+    xhr.send(jsonData)
+
+}
+
+
+// Delete
+/* xhr.open('DELETE',apiurl+'/'+6, true)
+xhr.setRequestHeader('Content-type','application/json')
+xhr.onload = function(){
+    let users = JSON.parse(xhr.responseText)
+    if(xhr.status ==200){
+       console.log(users)    
+    }
+    else{
+       console.log(users)
+    }
+}
+xhr.send()  */
+
+
+
+----FETCH API--------
+let apiurl = 'http://localhost:3000/users'
+
+
+
+//  GET REQUEST
+
+fetch(apiurl).then(function(response){
+       return response.json()
+})
+.then(function(data){
+    formatData(data)
+})
+.catch(function(reason){
+     console.log(reason)
+})
+
+
+
+function createElementByTag(tagname){
+    return document.createElement(tagname)
+}
+
+function formatData(users){
+   
+  for( let i in users){
+       let trNode = createElementByTag('tr')
+       let tdNode1 = createElementByTag('td')
+       let tdNode2= createElementByTag('td')
+       let tdNode3 = createElementByTag('td')
+       let tdNode4 = createElementByTag('td')
+       let tdNode5 = createElementByTag('td')
+
+       let btnEdit = createElementByTag('button')
+       btnEdit.innerHTML = 'Edit'
+       btnEdit.setAttribute('data-id',parseInt(i)+1)
+
+       let btnDelete = createElementByTag('button')
+       btnDelete.innerHTML = 'Delete'
+
+       btnEdit.onclick = editRecord
+       
+       tdNode5.appendChild(btnEdit)
+       tdNode5.appendChild(btnDelete)      
+
+
+       tdNode1.innerHTML = users[i]['id']
+       tdNode2.innerHTML = users[i]['name']
+       tdNode3.innerHTML = users[i]['username']
+       tdNode4.innerHTML = users[i]['email']
+
+
+       trNode.appendChild(tdNode1)
+       trNode.appendChild(tdNode2)
+       trNode.appendChild(tdNode3)
+       trNode.appendChild(tdNode4)
+       trNode.appendChild(tdNode5)
+       document.getElementById('tableData').appendChild(trNode)
+  }
+
+}
+let input1 = createElementByTag('input')
+input1.setAttribute('id','name')
+let input2 = createElementByTag('input')
+input2.setAttribute('id','username')
+
+let input3 = createElementByTag('input')
+input3.setAttribute('id','email')
+
+let btnUpdate = createElementByTag('button')
+let id;
+function editRecord(event){
+       let singleRecord;
+       id = event.target.getAttribute('data-id')
+      
+         fetch(apiurl+'/'+id)
+         .then(function(response){
+            return response.json()
+         })
+         .then(function(singleRecord){
+           console.log(singleRecord)
+            btnUpdate.innerHTML = 'Update'
+            input1.value = singleRecord.name
+            input2.value = singleRecord.username
+            input3.value = singleRecord.email
+            document.body.append(input1)
+            document.body.append(input2)
+            document.body.append(input3)
+            document.body.append(btnUpdate)
+            btnUpdate.onclick = updateRecord
+         })
+ 
+
+    
+    
+
+
+    
+
+}
+
+
+// Post Request
+/* let data = {}
+data.name = 'PETER PARKER'
+data.email = 'peter@gmail.com'
+data.username = 'peter121345'
+let jsonData = JSON.stringify(data)
+
+xhr.open('POST',apiurl,true)
+xhr.setRequestHeader('Content-type','application/json')
+xhr.onload = function(){
+    let users = JSON.parse(xhr.responseText)
+    if(xhr.status ==200){
+       console.log(users)    
+    }
+    else{
+       console.log(users)
+    }
+}
+xhr.send(jsonData) */
+
+
+// PUT REQUEST
+
+function updateRecord(){
+    let data= {}
+   data.name=  document.getElementById('name').value
+   data.username= document.getElementById('username').value
+   data.email=document.getElementById('email').value
+   
+   fetch(apiurl+'/'+id,{
+      method:'PUT',
+      body: JSON.stringify(data),
+      headers:{'content-type':'application/json'}
+   }).then(function(response){
+    return response.json()
+   })
+   .then(function(data){
+     console.log(data)
+   })
+   .catch(function(reason){
+    console.log(reason)
+   })
+}
+
+
+// Delete
+/* xhr.open('DELETE',apiurl+'/'+6, true)
+xhr.setRequestHeader('Content-type','application/json')
+xhr.onload = function(){
+    let users = JSON.parse(xhr.responseText)
+    if(xhr.status ==200){
+       console.log(users)    
+    }
+    else{
+       console.log(users)
+    }
+}
+xhr.send()  */
+
+-------Async/Await-------
+  let apiurl = 'http://localhost:3000/users'
+
+window.onload = getList
+
+//  GET REQUEST
+async function getList(){
+     let response =  await fetch(apiurl)
+     let result =  await response.json()
+     formatData(result)
+}
+
+
+
+
+function createElementByTag(tagname){
+    return document.createElement(tagname)
+}
+
+function formatData(users){
+   
+  for( let i in users){
+       let trNode = createElementByTag('tr')
+       let tdNode1 = createElementByTag('td')
+       let tdNode2= createElementByTag('td')
+       let tdNode3 = createElementByTag('td')
+       let tdNode4 = createElementByTag('td')
+       let tdNode5 = createElementByTag('td')
+
+       let btnEdit = createElementByTag('button')
+       btnEdit.innerHTML = 'Edit'
+       btnEdit.setAttribute('data-id',parseInt(i)+1)
+
+       let btnDelete = createElementByTag('button')
+       btnDelete.innerHTML = 'Delete'
+
+       btnEdit.onclick = editRecord
+       
+       tdNode5.appendChild(btnEdit)
+       tdNode5.appendChild(btnDelete)      
+
+
+       tdNode1.innerHTML = users[i]['id']
+       tdNode2.innerHTML = users[i]['name']
+       tdNode3.innerHTML = users[i]['username']
+       tdNode4.innerHTML = users[i]['email']
+
+
+       trNode.appendChild(tdNode1)
+       trNode.appendChild(tdNode2)
+       trNode.appendChild(tdNode3)
+       trNode.appendChild(tdNode4)
+       trNode.appendChild(tdNode5)
+       document.getElementById('tableData').appendChild(trNode)
+  }
+
+}
+let input1 = createElementByTag('input')
+input1.setAttribute('id','name')
+let input2 = createElementByTag('input')
+input2.setAttribute('id','username')
+
+let input3 = createElementByTag('input')
+input3.setAttribute('id','email')
+
+let btnUpdate = createElementByTag('button')
+let id;
+async function editRecord(event){
+       let singleRecord;
+       id = event.target.getAttribute('data-id')
+        
+        let response = await  fetch(apiurl+'/'+id)
+         singleRecord = await response.json()
+
+         
+           console.log(singleRecord)
+            btnUpdate.innerHTML = 'Update'
+            input1.value = singleRecord.name
+            input2.value = singleRecord.username
+            input3.value = singleRecord.email
+            document.body.append(input1)
+            document.body.append(input2)
+            document.body.append(input3)
+            document.body.append(btnUpdate)
+            btnUpdate.onclick = updateRecord
+       
+ 
+
+    
+    
+
+
+    
+
+}
+
+
+// Post Request
+/* let data = {}
+data.name = 'PETER PARKER'
+data.email = 'peter@gmail.com'
+data.username = 'peter121345'
+let jsonData = JSON.stringify(data)
+
+xhr.open('POST',apiurl,true)
+xhr.setRequestHeader('Content-type','application/json')
+xhr.onload = function(){
+    let users = JSON.parse(xhr.responseText)
+    if(xhr.status ==200){
+       console.log(users)    
+    }
+    else{
+       console.log(users)
+    }
+}
+xhr.send(jsonData) */
+
+
+// PUT REQUEST
+
+function updateRecord(){
+    let data= {}
+   data.name=  document.getElementById('name').value
+   data.username= document.getElementById('username').value
+   data.email=document.getElementById('email').value
+   
+   fetch(apiurl+'/'+id,{
+      method:'PUT',
+      body: JSON.stringify(data),
+      headers:{'content-type':'application/json'}
+   }).then(function(response){
+    return response.json()
+   })
+   .then(function(data){
+     console.log(data)
+   })
+   .catch(function(reason){
+    console.log(reason)
+   })
+}
+
+
+// Delete
+/* xhr.open('DELETE',apiurl+'/'+6, true)
+xhr.setRequestHeader('Content-type','application/json')
+xhr.onload = function(){
+    let users = JSON.parse(xhr.responseText)
+    if(xhr.status ==200){
+       console.log(users)    
+    }
+    else{
+       console.log(users)
+    }
+}
+xhr.send()  */
+
+
+-------Music----------
+index.html
+-------
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="app">
+        <header>
+            <h1>Tap Music</h1>
+        </header>
+        <div class="visual"></div>
+
+        <div class="pads">
+            <div class="pad1">
+                <audio src="./sounds/bubbles.mp3" class="sound"></audio>
+            </div>
+            <div class="pad2">
+                <audio src="./sounds/clay.mp3" class="sound"></audio>
+            </div>
+            <div class="pad3">
+                <audio src="./sounds/confetti.mp3" class="sound"></audio>
+            </div>
+            <div class="pad4">
+                <audio src="./sounds/glimmer.mp3" class="sound"></audio>
+            </div>
+            <div class="pad5">
+                <audio src="./sounds/moon.mp3" class="sound"></audio>
+            </div>
+            <div class="pad6">
+                <audio src="./sounds/ufo.mp3" class="sound"></audio>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+
+</html>
+
+
+index.js
+----------
+window.addEventListener('load',function(){
+     
+    let sounds = document.querySelectorAll('.sound')
+    let pads = document.querySelectorAll('.pads div')
+    let visual = document.querySelector('.visual')
+
+    const colors = [
+         'red',
+         'green',
+         'blue',
+         'orange',
+         'black',
+         'yellow'
+     ]
+
+     pads.forEach(function(pad,index){
+         pad.addEventListener('click',function(){
+             sounds[index].currentTime=0
+             sounds[index].play()
+
+             createBubble(index)
+
+         })
+      })
+
+      const createBubble = function(index){
+          let bubble = document.createElement('div')
+          visual.appendChild(bubble)
+          bubble.style.backgroundColor = colors[index]
+          bubble.style.animation = 'jump 1s ease'
+          
+          bubble.addEventListener('animationend',function(){
+            visual.removeChild(this)
+          })
+
+      }
+
+
+
+
+})
+
+
+index.css
+-----------
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.pads {
+    background: lightblue;
+    width: 100%;
+    display: flex;
+}
+
+.pads>div {
+    height: 100px;
+    width: 100px;
+    flex: 1;
+}
+
+.pad1 {
+    background-color: red;
+}
+
+.pad2 {
+    background-color: green;
+}
+
+.pad3 {
+    background-color: blue;
+}
+
+.pad4 {
+    background-color: orange;
+}
+
+.pad5 {
+    background-color: black;
+}
+
+.pad6 {
+    background-color: yellow;
+}
+
+.app{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.visual>div{
+    position: absolute;
+    bottom: 0%;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    transform: scale(1);
+    z-index: -1
+} 
+
+@keyframes jump{
+     0%{
+        bottom: 0%;
+        left: 0%;
+     }
+     50%{
+        bottom: 50%;
+        left:50%
+     }
+     100%{
+        bottom: 0;
+        left: 100%;
+     }
+
+}
+
+
+
+
+
+
+
+
+
+

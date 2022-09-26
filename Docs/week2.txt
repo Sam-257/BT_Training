@@ -1,0 +1,557 @@
+Week 2
+--------
+day 1
+-------
+  // Let 
+let name = 'Mike Tyson';
+const age = 34;
+
+// for..of loop
+let country = ['UK','INDIA','USA']
+for(let c of country){
+     console.log(c)
+}
+
+// Template Literal
+let currency = 'RUPEES';
+console.log(`India has currency ${currency}`)
+
+
+// Default values for Function parameters
+function sayHello(name='World'){
+     return `Hello ${name}`
+}
+console.log(sayHello())
+console.log(sayHello('John'))
+
+// Arrow function
+/* let sum = function(a,b){
+    return a+b
+} */
+// console.log(sum(2,3)) //5
+
+let sum = (a,b) => a+b //5
+let double = a => a*a //Arrow function with single parameter
+
+
+// classes
+class Rectangle{
+    //class constructor
+    constructor(l,w){
+        this.length = l
+        this.width = w
+    }
+
+    //class method
+    getArea(){
+        return this.length * this.width
+    }
+
+}
+
+class Square extends Rectangle{
+    constructor(l){
+        super(l,l)
+    }
+    getPerimeter(){
+        return 2* (this.length + this.width)
+    }
+
+}
+let r1 = new Rectangle(10,20)
+console.log(r1.getArea())
+
+let s1 = new Square(5)
+console.log(s1.getPerimeter())
+console.log(r1 instanceof Square)
+
+// Module
+// IIFE,namespace,// Let 
+let name = 'Mike Tyson';
+const age = 34;
+
+// for..of loop
+let country = ['UK','INDIA','USA']
+for(let c of country){
+     console.log(c)
+}
+
+// Template Literal
+let currency = 'RUPEES';
+console.log(`India has currency ${currency}`)
+
+
+// Default values for Function parameters
+function sayHello(name='World'){
+     return `Hello ${name}`
+}
+console.log(sayHello())
+console.log(sayHello('John'))
+
+// Arrow function
+/* let sum = function(a,b){
+    return a+b
+} */
+// console.log(sum(2,3)) //5
+
+let sum = (a,b) => a+b //5
+let double = a => a*a //Arrow function with single parameter
+
+
+// classes
+class Rectangle{
+    //class constructor
+    constructor(l,w){
+        this.length = l
+        this.width = w
+    }
+
+    //class method
+    getArea(){
+        return this.length * this.width
+    }
+
+}
+
+class Square extends Rectangle{
+    constructor(l){
+        super(l,l)
+    }
+    getPerimeter(){
+        return 2* (this.length + this.width)
+    }
+
+}
+let r1 = new Rectangle(10,20)
+console.log(r1.getArea())
+
+let s1 = new Square(5)
+console.log(s1.getPerimeter())
+console.log(r1 instanceof Square)
+
+// Module
+// IIFE,namespace,
+
+
+
+MODULE
+-----------
+ calc.js
+/* function add(a,b){
+    return a+b
+}
+
+function multiply(a,b){
+    return a*b
+}
+export {add, multiply} */
+
+
+
+export default function(a,b){
+    return a+b
+}
+
+
+app.js
+-----
+  
+/* import{add,multiply} from './calc.js'
+
+console.log(add(10,20))
+console.log(multiply(10,20)) */
+
+
+
+import add from './calc.js'
+
+console.log(add(10,20))
+
+
+
+es6.html
+----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- <script src="es6.js"></script> -->
+    <script type="module" src="ModuleDemo/app.js"></script>
+</body>
+</html>
+
+-  Make sure run through some server
+
+More feature
+// REST PARAMETER : pack the value
+// SPREAD OPERATOR  : unpack the value
+
+function printAllName(...args){
+    console.log(args)
+}
+
+printAllName('MIKE','PETER','PARKER')
+
+
+function printCountryName(cnt1,cnt2,cnt3){
+     console.log(cnt1,cnt2,cnt3)
+}
+let country = ['INDIA','USA','UK']
+printCountryName(12,13,...country)
+
+
+// Destructure Object/Array
+
+let currencies = ['Rupee','Dollar','Euro']
+
+// let [v1,v2,v3] = currencies
+// console.log(v1,v2,v3)
+// let [v1,,v3] = currencies
+// console.log(v1,v3)
+let [...data] = currencies
+console.log(data)
+
+let person = {name:'RICK',age:34}
+
+let {name,age} = person
+
+console.log(name,age)
+
+
+
+---------------INdexDB------
+// To Open/Create the database
+let openRequest = indexedDB.open('studentDB')
+console.log(openRequest)
+
+let db,studentStore;
+openRequest.onsuccess = (event)=>{
+   console.log(event)
+   db = event.target.result
+}
+
+openRequest.onerror = (event)=>{
+    console.log(event.target.errorCode)
+    
+ }
+
+ openRequest.onupgradeneeded = (event)=>{
+   const studentData= [
+       {id:1,name:'Rick',age:18},
+       {id:2,name:'Nick',age:38},
+       {id:3,name:'John',age:48},
+       {id:4,name:'Peter',age:28},
+   ]
+    db = event.target.result
+   studentStore = db.createObjectStore('students',{keyPath:"id"}) 
+
+   for(let index in studentData){
+      studentStore.add(studentData[index])
+   }
+ }
+
+ function addRecord(){
+       let uid = document.getElementById('id').value
+       let uname = document.getElementById('name').value
+       let uage = document.getElementById('age').value
+
+    let request =  db.transaction(['students'],'readwrite').objectStore('students')
+          .add({id: uid,name:uname, age:uage})
+
+    request.onsuccess = ()=>{
+        alert('Data is added')
+    }
+
+    request.onerror = ()=>{
+        alert('Error while adding the data')
+    }
+ }
+ 
+
+ function showRecord(){
+     let allRecord =   db.transaction(['students']).objectStore('students')
+
+     allRecord.openCursor().onsuccess = (event)=>{
+         let eachRecord = event.target.result
+         if(eachRecord){
+            let data= ` ID = ${eachRecord.value.id} <br> Name = ${eachRecord.value.name}<br>${eachRecord.value.age}`
+            document.write(data +'<br>')
+            eachRecord.continue() 
+        }
+        else{
+            alert('No More Records')
+        }
+     }
+ }
+
+ function deleteRecord(){
+
+
+    let request = db.transaction(['students'],'readwrite').objectStore('students')
+                        .delete(4)
+
+    request.onsuccess = ()=>{
+        alert('Data is deleted')
+    }
+
+    request.onerror = ()=>{
+        alert('Error while deleting the data')
+    }
+
+ }
+
+indedb.html
+------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <!-- <span id="output"></span> -->
+<!--     <p>
+        Enter Task: 
+        <input type="text" id="task">
+        <button onclick="addTask()">Add Task</button>
+    </p>
+    <p>
+        <a href="display.html">Display All Value</a>
+    </p>
+     <script src="storageapi.js"></script> -->
+
+     <!--IndexDB  -->
+     <p>
+        <input type="number" id="id">
+        <input type="text" id="name">
+        <input type="text" id="age">
+         <button onclick="addRecord()">Add</button>
+         <button onclick="showRecord()">Show Record</button>
+         <button onclick="deleteRecord()">delete Record</button>
+
+     </p>
+     <script src="indexDb.js"></script>
+
+     <!-- <script>
+        updateStatus()
+
+         function updateStatus(){
+             if(navigator.onLine){
+                 document.getElementById('output').innerHTML = 'Your connection is back'
+             }
+             else{
+                document.getElementById('output').innerHTML = 'You have lost internet connection'
+             }
+         }
+     </script> -->
+</body>
+</html>
+
+
+//storageapi.js
+function addTask(){
+    let taskName = document.getElementById('task').value
+    sessionStorage.setItem('task', taskName)
+
+}
+
+display.html
+---
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <span id="output"></span>
+    <script>
+       let taskName =  sessionStorage.getItem('task')
+       document.getElementById('output').innerHTML = taskName
+    </script>
+</body>
+</html>
+
+----------------
+
+File Reader API
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <input type="file" id="theTextFile" onchange="onLoadTextFile()" multiple >
+     <textarea name="" id="theMessageArea" cols="30" rows="10"></textarea>
+     <script>
+         function onLoadTextFile(){
+           const fileElement =  document.getElementById('theTextFile')
+        //    console.log(fileElement.files)
+           
+           const reader = new FileReader()
+           reader.onload =(event)=>{
+            // console.log(event)
+             let textRef =   document.getElementById('theMessageArea')
+             textRef.value = event.target.result
+           }
+
+           reader.onerror = (event)=>{
+             console.log('error while loading text file')
+           }
+
+           reader.readAsText(fileElement.files[0])
+         }
+     </script>
+</body>
+</html>
+
+
+
+
+
+
+--------Reading Image-----
+  readAsDataUrl(fileElement.files[i])
+
+
+
+TYPESCRIPT
+-----------
+  let myname: string = 'Peter';
+let age: number = 34;
+let isAdmin: boolean = true;
+
+
+let country = 'INDIA'
+
+// country  = 45
+
+let result;
+
+function sayHi():string{
+   return 'Hi'
+}
+
+const person = {
+     name:'MIKE', age:45, isAdmin: true
+}
+
+console.log(person.isAdmin)
+
+const scores = [45,33,44,11,55,22]
+const names = ['MIKE','PETER','JOHN']
+const Order: Object[] = [{name:'PETER'},{name:'JOHN'}]
+
+
+----class_interface---------
+  interface IProduct{
+   name: string
+   price: number
+}
+
+interface IOrderDetail {
+     product: IProduct
+     qty?: number
+     getTotal(discount: number):number
+     
+}
+
+const table: IProduct ={
+     name: 'Table',
+     price: 4000
+}
+const tableOrder: IOrderDetail = {
+      product:table,
+     
+      getTotal(discount): number{
+         return table.price
+      }
+}
+
+
+
+// class Shop implements IOrderDetail{
+
+// }
+
+
+console.log(table)
+console.log(tableOrder.getTotal(33))
+
+
+
+---Advance_type--------
+// union type
+type Username="Admin" | "SuperAdmin"
+
+let user: Username
+
+user = "Admin"
+user = 'SuperAdmin'
+user = 'guest'
+
+
+------Generic Function
+function myInfo<T>(args:T): T{
+    return args
+}
+
+let result = myInfo<string>('Google')
+let result1 = myInfo<number>(34)
+console.log(result,result1)
+
+
+function myInfo<T,U,V>(args:T,arg1:U, arg2:V): T{
+    return args
+}
+
+let result = myInfo<string,number,boolean>('Google',12,true)
+let result = myInfo<string,string,number>('Google','admin',34)
+
+console.log(result,result1)
+
+
+---generic Clas
+class CustomArray<T>{
+    arr:T[] = []
+
+    getItem(arr:T[]){
+       return this.arr = arr
+    }
+    addItem(item:T){
+        this.arr.push(item)
+    }
+}
+
+let obj1 = new CustomArray<number>()
+obj1.addItem(10)
+
+let obj2 = new CustomArray<string>()
+obj2.addItem('Rick')
+
+console.log(obj1, obj2)
+
+
+
+
+
+
+
+
+
+
+
+
