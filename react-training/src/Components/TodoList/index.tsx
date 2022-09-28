@@ -123,29 +123,43 @@ const TodoList = () => {
   };
 
   const todoItems = (status: boolean) => {
-    return todoList.map((todo: ITodoItems, index: number) =>
-      todo.status === status ? (
-        <tr key={index}>
-          <td>{todo.description}</td>
-          <td>
-            <input
-              type="checkbox"
-              name="status"
-              id="status"
-              checked={todo.status}
-              onChange={() => handleStatus(index)}
-            />
-          </td>
-          <td>
-            <button onClick={() => handleEdit(index)}>Edit</button>
-          </td>
-          <td>
-            <button onClick={() => handleDelete(index)}>Delete</button>
-          </td>
-        </tr>
-      ) : (
-        ""
-      )
+    return (
+      <table border={1}>
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {todoList.map((todo: ITodoItems, index: number) =>
+            todo.status === status ? (
+              <tr key={index}>
+                <td>{todo.description}</td>
+                <td>
+                  <input
+                    type="checkbox"
+                    name="status"
+                    id="status"
+                    checked={todo.status}
+                    onChange={() => handleStatus(index)}
+                  />
+                </td>
+                <td>
+                  <button onClick={() => handleEdit(index)}>Edit</button>
+                </td>
+                <td>
+                  <button onClick={() => handleDelete(index)}>Delete</button>
+                </td>
+              </tr>
+            ) : (
+              ""
+            )
+          )}
+        </tbody>
+      </table>
     );
   };
 
@@ -162,37 +176,13 @@ const TodoList = () => {
       <button onClick={!isEdit ? addTodo : editTodo}>
         {!isEdit ? "Add" : "Edit"} Todo
       </button>
-      <table border={1}>
-        <thead>
-          <tr>
-            <th>Description</th>
-            <th>Status</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>{todoItems(false)}</tbody>
-      </table>
+      {todoItems(false)}
       <VisibilityControl
         checkBoxName="Show Completed Todos"
         showCompleted={showCompleted}
         handleShow={handleShow}
       />
-      {showCompleted ? (
-        <table border={1}>
-          <thead>
-            <tr>
-              <th>Description</th>
-              <th>Status</th>
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>{todoItems(true)}</tbody>
-        </table>
-      ) : (
-        ""
-      )}
+      {showCompleted ? todoItems(true) : ''}
     </div>
   );
 };
