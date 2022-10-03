@@ -1,0 +1,2205 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 React unit test : https://codefile.io/f/bR62mUf3N9GAbIvBxLCC\
+-----------------------------------------------------------\
+\
+Week 2 -Day 2\
+-------\
+ App.tsx\
+----\
+import React from 'react';\
+import logo from './logo.svg';\
+import './App.css';\
+import Message from './Components/Message';\
+\
+function App() \{\
+  return (\
+    <div className="App">\
+        <Message info="Google" status="Active"/>\
+        <Message info="Microsoft" status="Inactive"/>\
+       \
+    </div>\
+  );\
+\}\
+\
+export default App;\
+\
+\
+Message.tsx\
+----\
+import React from 'react'\
+\
+type IProps = \{\
+    info?: string\
+    status?: string\
+\}\
+\
+// export default function Message(props:IProps) \{\
+export default function Message(\{info,status\}:IProps) \{\
+//   console.log(props)\
+//   let \{info, status\} = props\
+  return (\
+    <div>\
+         \{/* <h1>\{props.info\} , \{props.status\}</h1> */\}\
+         <h1>\{info\} , \{status\}</h1>\
+         <h1>ReactJS</h1>\
+    </div>\
+  )\
+\}\
+\
+\
+--Pass Array as Props-----\
+  App.tsx\
+import React from 'react';\
+import logo from './logo.svg';\
+import './App.css';\
+import Message from './Components/Message';\
+import Summary from './Components/Summary';\
+\
+function App() \{\
+  return (\
+    <div >\
+        <Message info="Google" status="Active"/>\
+        <Message info="Microsoft" status="Inactive"/>\
+        <Message info="Microsoft" status=\{true\}/>\
+          <hr/>\
+        <Summary colors=\{ ['RED','BLUE','GREEN','WHITE'] \} />\
+       \
+    </div>\
+  );\
+\}\
+\
+export default App;\
+\
+Summary.tsx\
+-----\
+  import React from 'react'\
+\
+type IProps = \{\
+    colors: string[]\
+\}\
+export default function Summary(props:IProps) \{\
+  return (\
+    <div>\
+       \{\
+         props.colors.map((c: string,index:number)=>\
+         \
+                <li key=\{index\} >\{c\}</li>\
+            \
+         )\
+       \}\
+    </div>\
+  )\
+\}\
+\
+\
+---_Example------\
+Dummay Data\
+        imgSrc:'http://gonewiththetwins.com/new/wp-content/uploads/2014/01/avatar.jpg', \
+        title:"AVATAR",\
+        text:"NETFLIX MOVIE"\
+\
+        imgSrc:'https://bollytrendz.com/wp-content/uploads/2021/07/IMG_20210702_150749-1.jpg', \
+        title:"TOMORROW WAR",\
+        text:"NETFLIX MOVIE"\
+ \
+        imgSrc:'https://terrigen-cdn-dev.marvel.com/content/prod/1x/theavengers_lob_crd_03.jpg', \
+        title:"AVENGERS",\
+        text:"AMAZON PRIME",\
+          \
+ ---Display above data in a component\
+\
+\
+ ------\
+App.tsx\
+import React from 'react';\
+import logo from './logo.svg';\
+import './App.css';\
+import Message from './Components/Message';\
+import Summary from './Components/Summary';\
+\
+let names = ["PETER","PARKER","RICK","NICK"]\
+\
+\
+\
+function App() \{\
+\
+  const printMyName = (myname: string)=>\{\
+      console.log(myname)\
+  \}\
+  return (\
+    <div >\
+         <table border=\{1\}>\
+          <thead>\
+            <tr>\
+               <th>#</th>\
+              <th>Names</th>\
+              <th>Action</th>\
+            </tr>\
+          </thead>\
+          <tbody>\
+              \{\
+                names.map((n: string,index:number)=>\
+                  <tr key=\{index\}>\
+                      <Summary index=\{index\} \
+                               name=\{n\} \
+                               printMyNameCallback=\{printMyName\}\
+                        />\
+                  </tr>\
+                \
+                )\
+              \}\
+          </tbody>\
+         </table>\
+\
+   \
+       \
+    </div>\
+  );\
+\}\
+\
+export default App;\
+\
+Summary.tsx\
+---\
+  import React from 'react'\
+\
+type IProps = \{\
+    index: number\
+    name: string\
+    printMyNameCallback:(data:string)=>void\
+\}\
+export default function Summary(props: IProps) \{\
+    \
+    /*  const handlePrint = ()=>\{\
+         alert(props.name)\
+     \} */\
+\
+   /*   const handlePrint = (data:string)=>\{\
+        alert(data)\
+     \} */\
+     return (\
+        <>\
+            <td>\{props.index\}</td>\
+            <td>\{props.name\}</td>\
+            <td>\
+            \{/* <button onClick=\{handlePrint\} >PrintName</button> */\}\
+            \{/* <button onClick=\{()=>handlePrint(props.name)\} >PrintName</button> */\}\
+            \
+            <button onClick=\{()=>props.printMyNameCallback(props.name)\} >PrintName</button>\
+\
+            </td>\
+        </>\
+\
+    )\
+\}\
+\
+\
+-------Pass All props to child component\
+App.tsx\
+import React from 'react';\
+import logo from './logo.svg';\
+import './App.css';\
+import Message from './Components/Message';\
+import Summary from './Components/Summary';\
+\
+let names = ["PETER","PARKER","RICK","NICK"]\
+\
+\
+\
+function App() \{\
+\
+  const printMyName = (myname: string)=>\{\
+      console.log(myname)\
+  \}\
+  return (\
+    <div >\
+         <table border=\{1\}>\
+          <thead>\
+            <tr>\
+               <th>#</th>\
+              <th>Names</th>\
+              <th>Action</th>\
+            </tr>\
+          </thead>\
+          <tbody>\
+              \{\
+                names.map((n: string,index:number)=>\
+                  <tr key=\{index\}>\
+                      <Summary index=\{index\} \
+                               name=\{n\} \
+                               printMyNameCallback=\{printMyName\}\
+                        />\
+                  </tr>\
+                \
+                )\
+              \}\
+          </tbody>\
+         </table>\
+       \
+    </div>\
+  );\
+\}\
+\
+export default App;\
+\
+Summary.tsx\
+---\
+import React from 'react'\
+import SimpleButton from './SimpleButton'\
+\
+type IProps = \{\
+    index: number\
+    name: string\
+    printMyNameCallback:(data:string)=>void\
+\}\
+export default function Summary(props: IProps) \{\
+\
+     return (\
+        <>\
+            <td>\{props.index\}</td>\
+            <td>\{props.name\}</td>\
+            <td>\
+           \
+            <SimpleButton \{...props\} className="btn btn-danger"\
+            \
+            />\
+\
+            </td>\
+            \
+        </>\
+\
+    )\
+\}\
+\
+SimpleButton.tsx\
+import React from 'react'\
+type IProps = \{\
+    index: number\
+    name: string\
+    printMyNameCallback:(data:string)=>void\
+    className: string\
+\}\
+export default function SimpleButton(props:IProps) \{\
+    console.log(props)\
+  return (\
+    <div>\
+        <button onClick=\{()=>props.printMyNameCallback(props.name)\}>\
+            \{props.name\}\
+        </button>\
+    </div>\
+  )\
+\}\
+\
+\
+\
+-----Default Value to props\
+\
+Summary.tsx\
+import React from 'react'\
+import SimpleButton from './SimpleButton'\
+\
+type IProps = \{\
+    index: number\
+    name: string\
+    printMyNameCallback: (data: string) => void\
+\}\
+export default function Summary(props: IProps) \{\
+\
+    return (\
+        <>\
+            <td>\{props.index\}</td>\
+            <td>\{props.name\}</td>\
+            <td>\
+\
+                <SimpleButton \{...props\} className="btn btn-danger"\
+\
+                />\
+\
+            </td>\
+            <td>\
+\
+               <SimpleButton \{...props\}  \
+\
+            />\
+\
+            </td>\
+\
+        </>\
+\
+    )\
+\}\
+\
+SimpleButton.tsx\
+\
+import React from 'react'\
+\
+type IProps = \{\
+    index: number\
+    name: string\
+    printMyNameCallback:(data:string)=>void\
+    className: string\
+\}\
+export default function SimpleButton(props:IProps) \{\
+    console.log(props)\
+  return (\
+    <div>\
+        <button onClick=\{()=>props.printMyNameCallback(props.name)\}>\
+            \{props.name\}\
+        </button>\
+        <h1>\{props.className\}</h1>\
+    </div>  \
+  )\
+\}\
+\
+SimpleButton.defaultProps = \{\
+    className: 'btn btn-success'\
+\}\
+\
+\
+-----------useState()\
+useStateDemo.tsx\
+----------------\
+import React, \{ useState \} from 'react'\
+\
+export default function UseStateDemo() \{\
+\
+  const [count,setCount] = useState(0)\
+\
+ \
+/*   const increment = ()=>\{\
+      setCount(count+1)  \
+  \}\
+  const decrement = ()=>\{\
+       setCount(count-1)  \
+  \
+  \} */\
+\
+  const incrementFive = () =>\{\
+    for(let i=0;i<5;i++)\{\
+        setCount(prevState=>prevState+1)\
+      \
+    \}\
+  \}\
+\
+  return (\
+    <div>\
+          <h1>Count : \{count\}</h1>\
+          \{/* <button onClick=\{increment\}>Increment</button>\
+          <button onClick=\{decrement\}>decrement</button>\
+          <button onClick=\{incrementFive\}>Increment five</button> */\}\
+\
+           <button onClick=\{()=>setCount(prevState=> prevState+1)\}>Increment</button>\
+          <button onClick=\{()=>setCount(prevState=> prevState+1)\}>decrement</button>\
+          <button onClick=\{incrementFive\}>Increment five</button>\
+    </div>\
+  )\
+\}\
+\
+-----useStatewithObject\
+import React, \{ useState \} from 'react'\
+\
+type loginForm = \{\
+    email: string\
+    password: string\
+\}\
+export default function UseStateWithObject() \{\
+\
+  const [loginData, setLoginData] = useState<loginForm>(\{email:'',password:''\})\
+\
+  return (\
+    <div>\
+        <form>\
+            <p>Email Address : \
+                 <input type="email"   onChange=\{(event)=>setLoginData(\{...loginData,email:event.target.value\})\} />\
+            </p>\
+            <p>Password : \
+                 <input type="password"   onChange=\{(event)=>setLoginData(\{...loginData,password:event.target.value\})\}  />\
+            </p>\
+        </form>\
+         <h3>\{JSON.stringify(loginData)\}</h3>\
+    </div>\
+  )\
+\}\
+\
+\
+\
+-------dynamic add input control\
+\
+\
+import React, \{ useState \} from 'react'\
+\
+type loginForm = \{\
+    email: string\
+    password: string\
+\}\
+export default function UseStateWithObject() \{\
+\
+  const [loginData, setLoginData] = useState<loginForm>(\{email:'',password:''\})\
+\
+  const handleChange = (event:React.ChangeEvent<HTMLInputElement>)=>\{\
+     \
+    setLoginData(\{...loginData, [event.target.type]:event.target.value\})\
+  \}\
+  return (\
+    <div>\
+        <form>\
+            <p>Email Address : \
+                 <input type="email"  onChange=\{(event)=>handleChange(event)\} />\
+            </p>\
+            <p>Password : \
+                 <input type="password"  onChange=\{(event)=>handleChange(event)\}  />\
+            </p>\
+\
+        </form>\
+         <h3>\{JSON.stringify(loginData)\}</h3>\
+    </div>\
+  )\
+\}\
+\
+QUIZ - https://www.qubits42.com/live/10800\
+\
+\
+---------------Day3\
+// map\
+let country = ['INDIA','USA','UK']\
+\
+country.map((cnt)=>\{\
+    console.log(cnt)\
+\})\
+\
+\
+let numbers = [1,2,3,4,5,6,7,8]\
+numbers.filter((num)=> num%2 ==0)\
+//[2,4]\
+\
+let sum = numbers.reduce((previousValue,currentValue)=>\{\
+    console.log(previousValue,currentValue)\
+    return previousValue + currentValue\
+\},0)\
+\
+// console.log(sum)\
+//pValue = 0 , currentValue = numbers[0]\
+\
+\
+-------TodoList APp\
+import React,\{useState\} from 'react'\
+\
+export default function Todo() \{\
+\
+    const [todoItems, setTodoItems] = useState([\
+        \{description:'Buy Flowers' , done:false\},\
+        \{description:'Get Shoe', done:false\},\
+        \{description:'Collect Tickets', done:true\},\
+        \{description:'Call John', done:false\},\
+    ])\
+\
+    const toggle = (item:any)=>\{\
+        //item =  \{description:'Get Shoe', done:false\},\
+        //todo =   \{description:'Get Shoe' , done:false\},\
+        setTodoItems(\
+            todoItems.map(\
+              todo => todo.description=== item.description?\{...todo,done:!todo.done\}:todo))\
+    \}\
+\
+    const toggleWithIndex = (index:number)=>\{  //index:1\
+         let temp = [...todoItems] \
+         temp[index].done =  !temp[index].done   //false=>true true=>false\
+         console.log(temp)\
+         setTodoItems(temp)\
+    \}\
+    const todoTableRows = ()=>\{\
+         return todoItems.map((item,index)=>(\
+            <tr key=\{index\}>\
+               <td>\{item.description\}</td>\
+               <td>\
+                  <input\
+                    type="checkbox"\
+                    checked=\{item.done\} \
+                    // onChange=\{()=>toggle(item)\}    \
+                    onChange=\{()=>toggleWithIndex(index)\}                  \
+                  />\
+               </td>\
+            </tr>\
+         ))\
+    \}\
+     const addTodo = () => \{\
+        let foundTask = todoItems.find(todo => todo.description === newTask)\
+            if (!foundTask) \{\
+            setTodoItems([...todoItems, \{ description: newTask, done: false \}])\
+        \}\
+        else\{\
+            alert('Description already existed')\
+        \}\
+    \}\
+\
+    return (\
+        <div>\
+            <h1>Peter's Todo List (\{todoItems.filter(t => !t.done).length\}) items to do</h1>\
+            <p>\
+                Enter Task:\
+                <input type="text" onChange=\{(event) => setNewTask(event.target.value)\} />\
+                <button onClick=\{addTodo\} >Add</button>\
+            </p>\
+\
+            <table border=\{1\}>\
+                <thead>\
+                    <tr>\
+                        <th>Description</th>\
+                        <th>Done</th>\
+                    </tr>\
+                </thead>\
+                <tbody>\
+                    \{todoTableRows()\}\
+                </tbody>\
+            </table>\
+        </div>\
+    )\
+\}\
+\
+\
+\
+-------useEffect\
+\
+useEfectDemo.tsx\
+------\
+\
+import React, \{ useEffect ,useState\} from 'react'\
+\
+export default function UseEffectDemo() \{\
+    const [name,setName] = useState<string>('')\
+    const [count,setCount] = useState<number>(0)\
+\
+    useEffect(()=>\{\
+      console.log('Inside UseEffect')  \
+    \},[count])  \
+  \
+    return (\
+      <div>\
+             <input type="text" onChange=\{(e)=>setName(e.target.value)\}/> \
+             <p>\
+                Count:\{count\}\
+             </p>\
+             <button onClick=\{()=> setCount(prevState=> prevState+1)\}>increment</button>\
+      </div>\
+    )\
+\}\
+\
+App.tsx\
+----\
+ <UseEffectDemo/>\
+  \
+  \
+  \
+  \
+  ------useRef\
+import React, \{ useEffect, useRef \} from 'react'\
+\
+export default function UseRefDemo() \{\
+   const divElement:any =  useRef()\
+   console.log(divElement)\
+   \
+   useEffect(()=>\{\
+      //  console.log(`The height of Div $\{divElement.current.offsetHeight\}`)\
+\
+      divElement.current.focus()\
+   \},[])\
+\
+  return (\
+   /*  <div ref=\{divElement\}>\
+       <h1>ReactJS</h1>\
+    </div> */\
+\
+     <input type="text" ref=\{divElement\} />\
+  )\
+\}\
+\
+\
+--------USECALLBACK HOOK --------\
+UseCallBackDemo.tsx\
+import React,\{useCallback, useState\} from 'react'\
+import Title from './Title'\
+\
+import Button from './Button';\
+import Count from './Count';\
+\
+export default function UseCallback() \{\
+  \
+    const [age,setAge] = useState(30)\
+    const [salary,setSalary] = useState(30000)\
+     \
+     const incrementAge = useCallback(()=>\{\
+         setAge(prevAge=> prevAge+1)\
+     \},[age])\
+\
+\
+     const incrementSalary = useCallback(()=>\{\
+        setSalary(prevSalary=> prevSalary+1000)\
+     \},[salary])\
+  \
+  return (\
+    <div>\
+        <Title/>\
+        <Count text="Age" count=\{age\}/>\
+        <Button handleClick = \{incrementAge\}>Increment Age</Button>\
+        <Count text="Salary" count=\{salary\}/>\
+        <Button handleClick = \{incrementSalary\}>Increment Salary</Button>\
+    </div>\
+  )\
+\}\
+\
+Title.tsx\
+----\
+import React from 'react'\
+\
+ function Title() \{\
+    console.log(`Rendering -Title`)\
+  return (\
+    <div>\
+        <h3>Title Component</h3>\
+    </div>\
+  )\
+\}\
+\
+export default React.memo(Title)\
+\
+Count.tsx\
+---\
+  import React from 'react'\
+type IProps = \{\
+    text: string\
+    count: number\
+\}\
+function Count(props:IProps) \{\
+    console.log(`Rendering - $\{props.text\}`)\
+  return (\
+    <div>\
+      \{props.text\} - \{props.count\}\
+    </div>\
+  )\
+\}\
+\
+export default React.memo(Count)\
+\
+Button.tsx\
+---\
+  import React from 'react'\
+type IProps = \{\
+      handleClick:()=>void\
+      children: JSX.Element | React.ReactNode\
+\
+\}\
+function Button(props:IProps) \{\
+    console.log(`Rendering - $\{props.children\}`)\
+  return (\
+    <div>\
+        <button onClick=\{props.handleClick\}>\
+            \{props.children\}\
+        </button>\
+    </div>\
+  )\
+\}\
+\
+export default React.memo(Button)\
+\
+\
+App.tsx\
+---\
+         <UseCallback/>\
+\
+  \
+  ------useMemo---\
+import React, \{  useState,useMemo \} from 'react'\
+\
+export default function UseMemoDemo() \{\
+\
+    const [counterOne, setCounterOne] = useState<number>(0)\
+    const [counterTwo, setCounterTwo] = useState<number>(0)\
+\
+    const incrementOne = ()=>\{\
+        setCounterOne(counterOne+1)\
+    \}\
+    const incrementTwo= ()=>\{\
+        setCounterTwo(counterTwo+1)\
+    \}\
+   \
+    const isEven = useMemo(()=>\{\
+        let i = 0\
+        while(i<2000000000) i++\
+        return counterOne %2 === 0\
+    \},[counterOne])\
+\
+  return (\
+    <div>\
+      \
+      <div>\
+        <button onClick=\{incrementOne\}>Count One - \{counterOne\}</button>\
+         <span>\{isEven? 'Even':'Odd'\}</span>\
+      </div>\
+        \
+       <button onClick=\{incrementTwo\}>Count Two - \{counterTwo\}</button>\
+    </div>\
+  )\
+\}\
+\
+\
+------------Custom Hook\
+useWindowWidth.tsx\
+import \{ useEffect,useState \} from "react"\
+\
+const useWindowWidth = ()=>\{\
+    \
+     const [smallScreen, setSmallScreen] = useState<boolean>(false)\
+\
+      useEffect(()=>\{\
+         checkScreenSize()\
+         window.addEventListener('resize',checkScreenSize)\
+      \},[])\
+      \
+     const checkScreenSize = ()=>\{\
+          setSmallScreen(window.innerWidth < 600)\
+     \}\
+\
+     return smallScreen\
+\
+\}\
+\
+\
+export default useWindowWidth\
+\
+\
+Layout.tsx\
+----\
+import React from 'react'\
+import useWindowWidth from './useWindowWidth';\
+\
+export default function Layout() \{\
+\
+  const smallScreen = useWindowWidth()\
+\
+  return (\
+    <div>\
+        \{smallScreen?'small':'Large'\}\
+    </div>\
+  )\
+\}\
+\
+\
+App.tsx\
+----\
+<Layout/>\
+\
+  \
+  -----Custom Hook Example 2\
+DocTitleOne.tsx\
+import React, \{ useEffect, useState \} from 'react'\
+import UseDocumentTitle from './UseDocumentTitle';\
+\
+export default function DocTitleOne() \{\
+\
+  const [count, setCount] = useState<number>(0) \
+\
+   UseDocumentTitle(count)\
+   \
+  return (\
+    <div>\
+        <button onClick=\{()=>setCount(prevCount=>prevCount+1)\}>Count - \{count\}</button>\
+    </div>\
+  )\
+\}\
+\
+DocTitleTwo.tsx\
+----\
+import React,\{useState,useEffect\} from 'react'\
+import UseDocumentTitle from './UseDocumentTitle';\
+\
+export default function DocTitleTwo() \{\
+    const [count, setCount] = useState<number>(0) \
+\
+     UseDocumentTitle(count)\
+     \
+    return (\
+      <div>\
+          <button onClick=\{()=>setCount(prevCount=>prevCount+1)\}>Count - \{count\}</button>\
+      </div>\
+    )\
+\}\
+\
+\
+UseDocumentTitle.tsx\
+\
+import \{ useEffect \} from "react"\
+\
+const UseDocumentTitle = (count:number)=>\{\
+\
+    useEffect(()=>\{\
+        document.title = `You have clicked $\{count\} times`\
+    \},[count])\
+\}\
+\
+export default UseDocumentTitle\
+\
+\
+----Working with API\
+npm isntall -g json-server\
+json-server db.json  --port 4000\
+npm install axios\
+\
+-----\
+db.json\
+--\
+\{\
+  \
+  "comments": [\
+    \{\
+      "postId": 1,\
+      "id": 1,\
+      "name": "id labore ex et quam laborum",\
+      "email": "Eliseo@gardner.biz",\
+      "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\\ntempora quo necessitatibus\\ndolor quam autem quasi\\nreiciendis et nam sapiente accusantium"\
+    \},\
+    \{\
+      "postId": 1,\
+      "id": 2,\
+      "name": "quo vero reiciendis velit similique earum",\
+      "email": "Jayne_Kuhic@sydney.com",\
+      "body": "est natus enim nihil est dolore omnis voluptatem numquam\\net omnis occaecati quod ullam at\\nvoluptatem error expedita pariatur\\nnihil sint nostrum voluptatem reiciendis et"\
+    \},\
+    \{\
+      "postId": 1,\
+      "id": 3,\
+      "name": "odio adipisci rerum aut animi",\
+      "email": "Nikita@garfield.biz",\
+      "body": "quia molestiae reprehenderit quasi aspernatur\\naut expedita occaecati aliquam eveniet laudantium\\nomnis quibusdam delectus saepe quia accusamus maiores nam est\\ncum et ducimus et vero voluptates excepturi deleniti ratione"\
+    \},\
+    \{\
+      "postId": 1,\
+      "id": 4,\
+      "name": "alias odio sit",\
+      "email": "Lew@alysha.tv",\
+      "body": "non et atque\\noccaecati deserunt quas accusantium unde odit nobis qui voluptatem\\nquia voluptas consequuntur itaque dolor\\net qui rerum deleniti ut occaecati"\
+    \},\
+    \{\
+      "postId": 1,\
+      "id": 5,\
+      "name": "vero eaque aliquid doloribus et culpa",\
+      "email": "Hayden@althea.biz",\
+      "body": "harum non quasi et ratione\\ntempore iure ex voluptates in ratione\\nharum architecto fugit inventore cupiditate\\nvoluptates magni quo et"\
+    \}\
+  ]\
+  \
+\}\
+check on browser :http://localhost:4000/comments\
+----\
+\
+--------GET METHOD------------\
+For Bootstrap\
+open index.html\
+----- \
+put below line within <head> section\
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">\
+----------\
+  \
+import React, \{ useEffect, useState \} from 'react'\
+import axios from 'axios'\
+\
+type IComment = \{\
+     postId: number\
+     id: number\
+     email: string\
+     name: string\
+     body: string\
+\}\
+\
+export default function Comment() \{\
+  const [comments, setComment] = useState<IComment[]>()\
+\
+  useEffect(()=>\{\
+       getCommentData()\
+  \})  \
+\
+  const getCommentData = ()=>\{\
+     axios.get('http://localhost:4000/comments')\
+          .then((response)=>\{\
+            //  console.log(response.data)\
+             setComment(response.data)\
+          \})\
+          .catch((error)=>\{\
+            console.log(error)\
+          \})\
+  \}\
+\
+  return (\
+    <div>\
+        <h1>Latest Comment</h1>\
+     \
+        <table className='table table-bordered'>\
+                        <thead>\
+                            <tr>\
+                                <th>ID</th>\
+                                <th>Name</th>\
+                                <th>Email</th>\
+                                <th>Body</th>\
+                            </tr>\
+                        </thead>\
+                        <tbody>\
+\
+                      \
+                    \
+           \{\
+            comments? comments?.map(cmt =>\
+                <>\
+                    <tr key=\{cmt.id\}>\
+                        <td>\{cmt.id\}</td>\
+                        <td>\{cmt.name\}</td>\
+                        <td>\{cmt.email\}</td>\
+                        <td>\{cmt.body\}</td>\
+                    </tr>  \
+                </>\
+                )\
+                :\
+                <tr>\
+                    <td className='text-center' colSpan=\{4\}><div className="spinner-border text-info" role="status">\
+  <span className="visually-hidden">Loading...</span>\
+</div></td>\
+                </tr>  \
+           \}\
+             </tbody>\
+        </table>\
+    </div>\
+  )\
+\}\
+\
+App.tsx\
+---\
+<Comment/>\
+  \
+  \
+  \
+  \
+------GET + PUT-----\
+  import React, \{ useEffect, useState \} from 'react'\
+import axios from 'axios'\
+\
+type IComment = \{\
+    postId?: number\
+    id: number\
+    email: string\
+    name: string\
+    body: string\
+\}\
+\
+\
+export default function Comment() \{\
+    const [comments, setComment] = useState<IComment[]>()\
+    const [showEditForm, setEditForm] = useState<boolean>(false)\
+    const [commentForm ,setCommentForm] = useState<IComment>(\{\
+         name:'', email:'', body:'',id:0\
+    \})\
+    useEffect(() => \{\
+        getCommentData()\
+    \},[])\
+\
+    const getCommentData = () => \{\
+        axios.get('http://localhost:4000/comments')\
+            .then((response) => \{\
+                setComment(response.data)\
+            \})\
+            .catch((error) => \{\
+                console.log(error)\
+            \})\
+    \}\
+\
+\
+    const editRecord = (commentData:IComment)=>\{\
+        setEditForm(true)\
+           setCommentForm(commentData)\
+    \}\
+   \
+    const updateRecord = ()=>\{\
+        axios.put(`http://localhost:4000/comments/$\{commentForm.id\}`,commentForm,\{headers:\{'content-type':'application/json'\}\})\
+            .then((response) => \{\
+                alert(`Updated Record id:$\{commentForm.id\} Successfully`)\
+                getCommentData()\
+                setEditForm(false)\
+            \})\
+            .catch((error) => \{\
+                console.log(error)\
+            \})\
+    \}\
+\
+    const handleChange = (event:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>\{\
+        setCommentForm(\{...commentForm, [event.target.name]:event.target.value\})\
+    \}\
+    return (\
+        <div className='container mt-4'>\
+            <h3 className='text-info'>Latest Comment</h3>\
+          \
+            <table className='table table-bordered mt-4 border border-info'>\
+                <thead className='text-danger text-center'>\
+                    <tr>\
+                        <th>ID</th>\
+                        <th>Name</th>\
+                        <th>Email</th>\
+                        <th>Body</th>\
+                        <th>Action(s)</th>\
+                    </tr>\
+                </thead>\
+                <tbody>\
+\
+\
+\
+                    \{\
+                       comments ? comments?.map(cmt =>\
+                            <>\
+                                <tr key=\{cmt.id\}>\
+                                    <td>\{cmt.id\}</td>\
+                                    <td>\{cmt.name\}</td>\
+                                    <td>\{cmt.email\}</td>\
+                                    <td>\{cmt.body\}</td>\
+                                    <td>\
+                                        <button onClick=\{()=>editRecord(cmt)\}>Edit</button>\
+                                    </td>\
+                                </tr>\
+                            </>\
+                        )\
+                            :\
+                            <tr>\
+                                <td className='text-center' colSpan=\{4\}><div className="spinner-border text-info" role="status">\
+                                    <span className="visually-hidden">Loading...</span>\
+                                </div></td>\
+                            </tr>\
+                    \}\
+                </tbody>\
+            </table>\
+            \{\
+                showEditForm?\
+                <> \
+                  <p>\
+                    Enter Name : <input onChange=\{(e)=>handleChange(e)\} className="form-control" value=\{commentForm.name\} \
+                                        name='name' type="text"  />\
+                  </p>\
+                  <p>\
+                    Enter Email : <input onChange=\{(e)=>handleChange(e)\} className="form-control" value=\{commentForm.email\} \
+                                    name='email' type="text"  />\
+                  </p>\
+                  <p>\
+                    Enter Body : <textarea name="body" onChange=\{(e)=>handleChange(e)\} className="form-control"  value=\{commentForm.body\}\
+                                           cols=\{30\} rows=\{10\}></textarea>\
+                  </p>\
+                  <p>\
+                     <button onClick=\{updateRecord\}>Update</button>\
+                  </p>\
+                \
+                </>\
+                :null\
+            \}\
+        </div>\
+    )\
+\}\
+\
+\
+--------------GET+PUT+DELETE------------\
+import React, \{ useEffect, useState \} from 'react'\
+import axios from 'axios'\
+\
+type IComment = \{\
+    postId?: number\
+    id: number\
+    email: string\
+    name: string\
+    body: string\
+\}\
+\
+\
+export default function Comment() \{\
+    const [comments, setComment] = useState<IComment[]>()\
+    const [showEditForm, setEditForm] = useState<boolean>(false)\
+    const [commentForm ,setCommentForm] = useState<IComment>(\{\
+         name:'', email:'', body:'',id:0\
+    \})\
+    useEffect(() => \{\
+        getCommentData()\
+    \},[])\
+\
+    const getCommentData = () => \{\
+        axios.get('http://localhost:4000/comments')\
+            .then((response) => \{\
+                setComment(response.data)\
+            \})\
+            .catch((error) => \{\
+                console.log(error)\
+            \})\
+    \}\
+\
+\
+    const editRecord = (commentData:IComment)=>\{\
+        setEditForm(true)\
+           setCommentForm(commentData)\
+    \}\
+   \
+    const updateRecord = ()=>\{\
+        axios.put(\
+            `http://localhost:4000/comments/$\{commentForm.id\}`,\
+            commentForm,\
+            \{\
+                headers:\{'content-type':'application/json'\}\
+            \})\
+            .then((response) => \{\
+                alert(`Updated Record id:$\{commentForm.id\} Successfully`)\
+                getCommentData()\
+                setEditForm(false)\
+            \})\
+            .catch((error) => \{\
+                console.log(error)\
+            \})\
+    \}\
+\
+    const handleChange = (event:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>\{\
+        setCommentForm(\{...commentForm, [event.target.name]:event.target.value\})\
+    \}\
+    \
+    const deleteRecord = (id: number)=>\{\
+          if(window.confirm('Are You sure to delete ?'))\{\
+             axios.delete(`http://localhost:4000/comments/$\{id\}`)\
+                  .then(()=> \{\
+                    alert('deleted Successfully')\
+                    getCommentData()\
+                  \})\
+                  .catch(error=> console.log(error))\
+          \}\
+    \}\
+    return (\
+        <div className='container mt-4'>\
+            <h3 className='text-info'>Latest Comment</h3>\
+          \
+            <table className='table table-bordered mt-4 border border-info'>\
+                <thead className='text-danger text-center'>\
+                    <tr>\
+                        <th>ID</th>\
+                        <th>Name</th>\
+                        <th>Email</th>\
+                        <th>Body</th>\
+                        <th>Action(s)</th>\
+                    </tr>\
+                </thead>\
+                <tbody>\
+\
+\
+\
+                    \{\
+                       comments ? comments?.map(cmt =>\
+                            <>\
+                                <tr key=\{cmt.id\}>\
+                                    <td>\{cmt.id\}</td>\
+                                    <td>\{cmt.name\}</td>\
+                                    <td>\{cmt.email\}</td>\
+                                    <td>\{cmt.body\}</td>\
+                                    <td>\
+                                        <button onClick=\{()=>editRecord(cmt)\}>Edit</button>\
+                                        <button onClick=\{()=>deleteRecord(cmt.id)\}>Delete</button>\
+\
+                                    </td>\
+                                </tr>\
+                            </>\
+                        )\
+                            :\
+                            <tr>\
+                                <td className='text-center' colSpan=\{4\}><div className="spinner-border text-info" role="status">\
+                                    <span className="visually-hidden">Loading...</span>\
+                                </div></td>\
+                            </tr>\
+                    \}\
+                </tbody>\
+            </table>\
+            \{\
+                showEditForm?\
+                <> \
+                  <p>\
+                    Enter Name : <input onChange=\{(e)=>handleChange(e)\} className="form-control" value=\{commentForm.name\} \
+                                        name='name' type="text"  />\
+                  </p>\
+                  <p>\
+                    Enter Email : <input onChange=\{(e)=>handleChange(e)\} className="form-control" value=\{commentForm.email\} \
+                                    name='email' type="text"  />\
+                  </p>\
+                  <p>\
+                    Enter Body : <textarea name="body" onChange=\{(e)=>handleChange(e)\} className="form-control"  value=\{commentForm.body\}\
+                                           cols=\{30\} rows=\{10\}></textarea>\
+                  </p>\
+                  <p>\
+                     <button onClick=\{updateRecord\}>Update</button>\
+                  </p>\
+                \
+                </>\
+                :null\
+            \}\
+        </div>\
+    )\
+\}\
+\
+\
+EXAMPLE + JWT TOKEN\
+-----\
+loginAPi :  https://angularjwtauthentication.herokuapp.com/api/user/login \
+RegisterAPi : https://angularjwtauthentication.herokuapp.com/api/user/register\
+SecureAPi :  https://angularjwtauthentication.herokuapp.com/api/user/list\
+\
+headers : 'content-type':'application/json' , Authorization : Bearer token\
+\
+data format \
+------------------\
+for Register\
+\{\
+  "name":"",\
+  "email": "rock123@gmail.com",\
+  "password": "rock1234"\
+\
+\}\
+for Login\
+\{\
+  "email": "rock123@gmail.com",\
+  "password": "rock1234"\
+\
+\}\
+--------------------------------------------------------------------------------\
+\
+\
+Solution:\
+\
+Main.tsx\
+-----\
+  import React,\{useState\} from 'react'\
+import Comment from './ApiDemo/Comment'\
+import List from './ApiDemo/List'\
+import Login from './ApiDemo/Login'\
+import Register from './ApiDemo/Register'\
+import UseStateWithObject from './Hooks/UseStateWithObject'\
+\
+export default function Main() \{\
+   const [isLogin, setLogin] = useState<boolean>(false)\
+   const [isRegister, setRegister] = useState<boolean>(false)\
+   const [isSecure, setSecure] = useState<boolean>(false)\
+\
+   \
+  const  setStatus = (value: string)=>\{\
+      switch(value)\{\
+          case 'isRegister':\
+              setRegister(!isRegister)\
+              setLogin(false)\
+              setSecure(false)\
+              break\
+\
+         case 'isLogin':\
+            setLogin(!isLogin)\
+            setRegister(false)\
+            setSecure(false)\
+            break\
+      \
+        case 'isSecure':\
+            setSecure(!isSecure)\
+            setLogin(false)\
+            setRegister(false)\
+              break\
+      \}\
+   \}\
+  return (\
+    <div>\
+          <button onClick=\{()=>setStatus('isRegister')\}>Register</button>   \
+          <button onClick=\{()=>setStatus('isLogin')\}>Login</button>   \
+      \
+        <button onClick=\{()=>setStatus('isSecure')\}>List</button>      \
+        \{\
+            isRegister && (\
+                <Register/>\
+            )\
+        \}\
+         \{\
+            isLogin && (\
+                <Login/>\
+            )\
+        \}\
+           \{\
+            isSecure && (\
+                <List/>\
+            )\
+        \}\
+    </div>\
+  )\
+\}\
+\
+Register.tsx\
+----\
+import React,\{useState\} from 'react'\
+import axios from 'axios';\
+\
+type IregisterForm = \{\
+    email: string\
+    password: string\
+    name: string\
+\}\
+export default function Register() \{\
+    const [message, setMessage] = useState<string>()\
+    const [registerForm, setregisterForm] = useState<IregisterForm>(\{email:'',password:'',name:''\})\
+\
+    const handleChange = (event:React.ChangeEvent<HTMLInputElement>)=>\{\
+        console.log(typeof event.target.value)\
+        setregisterForm(\{...registerForm, [event.target.name]:event.target.value\})\
+    \}\
+    \
+   const register = ()=>\{\
+     axios.post(\
+        'https://angularjwtauthentication.herokuapp.com/api/user/register',\
+        registerForm,\
+        \{\
+            headers: \{'content-type':'application/json'\}\
+        \}\
+     )\
+     .then(response=> setMessage('User registered successfully'))\
+     .catch(error=> console.log(error))\
+   \}\
+\
+\
+  \
+    return (\
+      <div className='container mt-4'>\
+\
+              <p>Email Address : \
+                   <input className='form-control' name='email' type="email"   onChange=\{(event)=>handleChange(event)\} />\
+              </p>\
+              <p>Password : \
+                   <input className='form-control' name='password' type="password"  onChange=\{(event)=>handleChange(event)\}  />\
+              </p>\
+              <p>Name : \
+                   <input className='form-control' name='name' type="text"  onChange=\{(event)=>handleChange(event)\}  />\
+              </p>\
+\
+              <p>\
+                <button onClick=\{register\}>Register</button>\
+              </p>\
+\
+              <h6 className='text-success'>\{message\}</h6>\
+         \
+          \
+      </div>\
+    )\
+  \
+\}\
+  \
+\
+Login.tsx\
+---\
+  import React, \{ useState \} from 'react'\
+import axios from 'axios';\
+\
+type IloginForm = \{\
+    email: string\
+    password: string\
+\
+\}\
+export default function Login() \{\
+    const [message, setMessage] = useState<string>()\
+\
+    const [loginForm, setloginForm] = useState<IloginForm>(\{ email: '', password: '' \})\
+\
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => \{\
+        console.log(typeof event.target.value)\
+        setloginForm(\{ ...loginForm, [event.target.name]: event.target.value \})\
+    \}\
+\
+    const login = () => \{\
+        axios.post(\
+            'https://angularjwtauthentication.herokuapp.com/api/user/login',\
+            loginForm,\
+            \{\
+                headers: \{ 'content-type': 'application/json' \}\
+            \}\
+        )\
+            .then(response => \{\
+                setMessage('Login successfully')\
+\
+                localStorage.setItem('token', response.data.token)\
+\
+            \})\
+            .catch(error => console.log(error))\
+    \}\
+\
+\
+\
+    return (\
+        <div className='container mt-4'>\
+\
+            <p>Email Address :\
+                <input className='form-control' name='email' type="email" onChange=\{(event) => handleChange(event)\} />\
+            </p>\
+            <p>Password :\
+                <input className='form-control' name='password' type="password" onChange=\{(event) => handleChange(event)\} />\
+            </p>\
+\
+            <p>\
+                <button onClick=\{login\}>Login</button>\
+            </p>\
+\
+            <h6 className='text-success'>\{message\}</h6>\
+        </div>\
+    )\
+\
+\}\
+\
+List.tsx\
+--\
+import React, \{ useEffect,useState \} from 'react'\
+import axios from 'axios';\
+\
+\
+\
+export default function List() \{\
+   const [message, setMessage] = useState<string>()\
+   const [error, setError] = useState<string>()\
+\
+    useEffect(() => \{\
+        axios.get(\
+            'https://angularjwtauthentication.herokuapp.com/api/user/list',\
+            \{\
+                headers: \{\
+                    'Authorization': `Bearer $\{localStorage.getItem('token')\}`\
+                \}\
+            \}\
+\
+        )\
+        .then(response=> setMessage(response.data.text))\
+        .catch(error=> setError(error.message))\
+    \})\
+    return (\
+        <div className='container mt-4'>\
+            \{\
+                error?\
+                <h3 className='display-4'>Unauthorized Request</h3>\
+                :\
+                <h3 className='display-4'>\{message? message:'Please wait....'\}</h3>\
+            \}\
+        </div>\
+    )\
+\}\
+\
+App.tsx\
+--\
+<Main/>\
+ ----------------------------------------------------------------\
+Change login with Logout\
+\
+Main.tsx\
+import React,\{useState,useEffect\} from 'react'\
+import Comment from './ApiDemo/Comment'\
+import List from './ApiDemo/List'\
+import Login from './ApiDemo/Login'\
+import Register from './ApiDemo/Register'\
+import UseStateWithObject from './Hooks/UseStateWithObject'\
+\
+\
+export default function Main() \{\
+\
+   const [isLogin, setLogin] = useState<boolean>(false)\
+   const [isRegister, setRegister] = useState<boolean>(false)\
+   const [isSecure, setSecure] = useState<boolean>(false)\
+   const [loggedIn , setLoggedIn] = useState<boolean>(false)\
+ \
+\
+   \
+  const  setStatus = (value: string)=>\{\
+      switch(value)\{\
+          case 'isRegister':\
+              setRegister(!isRegister)\
+              setLogin(false)\
+              setSecure(false)\
+              break\
+\
+         case 'isLogin':\
+            setLogin(!isLogin)\
+            setRegister(false)\
+            setSecure(false)\
+            break\
+      \
+        case 'isSecure':\
+            setSecure(!isSecure)\
+            setLogin(false)\
+            setRegister(false)\
+              break\
+      \}\
+   \}\
+\
+   const checkLoggedIn = ()=>\{          \
+           setLoggedIn(!loggedIn)\
+   \}\
+\
+   const logout = ()=>\{\
+      if(window.confirm('Are you sure to Logout ?'))\{\
+            localStorage.removeItem('token')\
+            alert('Logout successfully')\
+            setLoggedIn(!loggedIn)\
+      \}\
+      else\{\
+        return false\
+      \}\
+   \
+       \
+   \}\
+  return (\
+    <div>\
+          <button onClick=\{()=>setStatus('isRegister')\}>Register</button>   \
+         \{\
+            loggedIn? \
+                   <button onClick=\{logout\}>Logout</button>   \
+                   :\
+             \
+                 <button onClick=\{()=>setStatus('isLogin')\}>Login</button>   \
+         \}\
+      \
+          <button onClick=\{()=>setStatus('isSecure')\}>List</button>      \
+        \{\
+            isRegister && (\
+                <Register/>\
+            )\
+        \}\
+         \{\
+            isLogin && (\
+                <Login checkLoggedIn = \{checkLoggedIn\} />\
+            )\
+        \}\
+           \{\
+            isSecure && (\
+                <List/>\
+            )\
+        \}\
+     \
+    </div>\
+  )\
+\}\
+\
+Login.tsx\
+----\
+import React, \{ useState,useEffect \} from 'react'\
+import axios from 'axios';\
+\
+ \
+ type IProps = \{\
+    checkLoggedIn:()=>void\
+  \
+ \}\
+\
+type IloginForm = \{\
+    email: string\
+    password: string\
+\
+\
+\}\
+export default function Login(props:IProps) \{\
+\
+    const [message1, setMessage1] = useState<string>('')\
+\
+    const [loginForm, setloginForm] = useState<IloginForm>(\{ email: '', password: '' \})\
+\
+\
+\
+\
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => \{\
+        console.log(typeof event.target.value)\
+        setloginForm(\{ ...loginForm, [event.target.name]: event.target.value \})\
+    \}\
+\
+    const login = () => \{\
+        axios.post(\
+            'https://angularjwtauthentication.herokuapp.com/api/user/login',\
+            loginForm,\
+            \{\
+                headers: \{ 'content-type': 'application/json' \}\
+            \}\
+        )\
+            .then(response => \{\
+                setMessage1('Login Successfully')\
+                props.checkLoggedIn()\
+                localStorage.setItem('token', response.data.token)\
+              \
+\
+            \})\
+            .catch(error => console.log(error))\
+    \}\
+\
+\
+\
+    return (\
+        <div className='container mt-4'>\
+\
+            <p>Email Address :\
+                <input className='form-control' name='email' type="email" onChange=\{(event) => handleChange(event)\} />\
+            </p>\
+            <p>Password :\
+                <input className='form-control' name='password' type="password" onChange=\{(event) => handleChange(event)\} />\
+            </p>\
+\
+            <p>\
+                <button onClick=\{login\}>Login</button>\
+            </p>\
+\
+            <h6 className='text-success'>\{message1\}</h6>\
+        </div>\
+    )\
+\
+\}\
+\
+\
+----------Router---------------------\
+App.tsx\
+import React from 'react';\
+import logo from './logo.svg';\
+import './App.css';\
+\
+import Comment from './Components/ApiDemo/Comment';\
+import Test from './Components/Test';\
+import \{BrowserRouter,Routes,Route\}from 'react-router-dom'\
+import Menu from './Components/Views/Menu';\
+import Home from './Components/Views/Home';\
+import ViewNotFound from './Components/Views/ViewNotFound';\
+\
+function App() \{\
+\
+\
+  return (\
+    <div >\
+\
+        <BrowserRouter>\
+               <Menu/>\
+                <Routes>                \
+                  <Route path="/home" element=\{<Home/>\}/>\
+                  <Route path="/comment" element=\{<Comment/>\}/>\
+                  <Route path="*" element=\{<ViewNotFound/>\}/>\
+               </Routes>\
+        </BrowserRouter>\
+\
+        \
+\
+\
+    </div>\
+  );\
+\}\
+\
+export default App;\
+\
+\
+Views/Home.tsx\
+-------\
+ import React from 'react'\
+\
+export default function Home() \{\
+  return (\
+    <div>\
+        <h1>Home Page</h1>\
+    </div>\
+  )\
+\}\
+\
+Views/Menu.tsx\
+--------\
+import React from 'react'\
+import \{Link\} from 'react-router-dom'\
+\
+export default function Menu() \{\
+  return (\
+    <div>\
+         <Link to='/home'>Home</Link> &nbsp; &nbsp; &nbsp;\
+         <Link to='/comment'>Comment</Link>\
+    </div>\
+  )\
+\}\
+\
+\
+\
+------Router with custom requirement-----\
+ Menu.tsx\
+import React from 'react'\
+import \{Link,Outlet\} from 'react-router-dom'\
+\
+export default function Menu() \{\
+  return (\
+    <div>\
+         <Link to='/home'>Home</Link> &nbsp; &nbsp; &nbsp;\
+         <Link to='/comment'>Comment</Link>\
+         <Link to='/login'>Login</Link>\
+\
+         <Outlet/>\
+    </div>\
+  )\
+\}\
+\
+App.tsx\
+-------\
+    <BrowserRouter>\
+     \
+               <Routes>\
+                   <Route path="/" element=\{<Menu/>\}>\
+                       <Route index  element=\{<Navigate to="/home"/>\}/>\
+                       <Route path="home" element=\{<Home/>\}/>\
+                       <Route path="comment" element=\{<Comment/>\}/>\
+                  </Route>\
+                  <Route path='/login'  element=\{<Test/>\}/>\
+               </Routes>\
+        </BrowserRouter>\
+\
+\
+\
+\
+-------------------------------------------------------\
+NESTED ROUTE\
+----\
+App.tsx\
+   <BrowserRouter>\
+               <Menu/>\
+               <Routes>  \
+                  <Route path='/' element=\{<Navigate to="home"/>\}/>              \
+                  <Route path="/home" element=\{<Home/>\}/>               \
+                  <Route path="/comment/*" element=\{<Comment/>\}/>            \
+\
+              \
+                  <Route path="*" element=\{<ViewNotFound/>\}/>\
+               \
+               </Routes>\
+        </BrowserRouter>\
+\
+Comment.tsx\
+------\
+\
+  import React from 'react'\
+import \{Link,Route, Routes\} from 'react-router-dom'\
+import CommentDetails from '../Views/CommentDetails'\
+import AddComment from '../Views/AddComment';\
+import EditComment from '../Views/EditComment';\
+\
+export default function Comment() \{\
+  return (\
+   \
+    <>\
+     <div className='container mt-4  text-center pt-2 pb-2'>\
+        <Link to='/comment/addComment'>Add Comment</Link> &nbsp; &nbsp; &nbsp;\
+        <Link to='/comment/list'>List</Link>\
+\
+         \
+    </div>\
+     <div className='container'>\
+     <Routes>\
+            <Route path='list' element=\{<CommentDetails/>\}/>\
+            <Route path='addComment' element=\{<AddComment/>\}/>\
+            <Route path='edit/:id' element=\{<EditComment/>\}/>\
+         </Routes>\
+     </div>\
+    </>\
+    \
+  )\
+\}\
+\
+View/CommentDetails.tsx\
+-------\
+import React, \{ useEffect, useState \} from 'react'\
+import axios from 'axios'\
+import \{Link\} from 'react-router-dom'\
+\
+type IComment = \{\
+    postId?: number\
+    id: number\
+    email: string\
+    name: string\
+    body: string\
+\}\
+\
+\
+export default function CommentDetails() \{\
+    const [comments, setComment] = useState<IComment[]>()\
+    const [showEditForm, setEditForm] = useState<boolean>(false)\
+    const [commentForm ,setCommentForm] = useState<IComment>(\{\
+         name:'', email:'', body:'',id:0\
+    \})\
+    useEffect(() => \{\
+        getCommentData()\
+    \},[])\
+\
+    const getCommentData = () => \{\
+        axios.get('http://localhost:4000/comments')\
+            .then((response) => \{\
+                setComment(response.data)\
+            \})\
+            .catch((error) => \{\
+                console.log(error)\
+            \})\
+    \}\
+\
+\
+    const editRecord = (commentData:IComment)=>\{\
+        setEditForm(true)\
+           setCommentForm(commentData)\
+    \}\
+   \
+\
+ \
+    \
+    const deleteRecord = (id: number)=>\{\
+          if(window.confirm('Are You sure to delete ?'))\{\
+             axios.delete(`http://localhost:4000/comments/$\{id\}`)\
+                  .then(()=> \{\
+                    alert('deleted Successfully')\
+                    getCommentData()\
+                  \})\
+                  .catch(error=> console.log(error))\
+          \}\
+    \}\
+    return (\
+        <div className='container mt-4'>\
+        \
+          \
+            <table className='table table-bordered mt-4 border border-info'>\
+                <thead className='text-danger text-center'>\
+                    <tr>\
+                        <th>ID</th>\
+                        <th>Name</th>\
+                        <th>Email</th>\
+                        <th>Body</th>\
+                        <th colSpan=\{2\}>Action(s)</th>\
+                    </tr>\
+                </thead>\
+                <tbody>\
+                 \{\
+                       comments ? comments?.map(cmt =>\
+                            <>\
+                                <tr key=\{cmt.id\}>\
+                                    <td>\{cmt.id\}</td>\
+                                    <td>\{cmt.name\}</td>\
+                                    <td>\{cmt.email\}</td>\
+                                    <td>\{cmt.body\}</td>\
+                                    <td>\
+                                        <Link to=\{`/comment/edit/$\{cmt.id\}`\} className="btn btn-sm btn-danger" >Edit</Link>\
+\
+                                    </td>\
+                                    <td>\
+                                    <button onClick=\{()=>deleteRecord(cmt.id)\}>Delete</button>\
+\
+                                    </td>\
+                                </tr>\
+                            </>\
+                        )\
+                            :\
+                            <tr>\
+                                <td className='text-center' colSpan=\{4\}><div className="spinner-border text-info" role="status">\
+                                    <span className="visually-hidden">Loading...</span>\
+                                </div></td>\
+                            </tr>\
+                    \}\
+                </tbody>\
+            </table>\
+         \
+        </div>\
+    )\
+\}\
+\
+\
+Views/EditComment.tsx-----\
+-----\
+import React,\{useState,useEffect\} from 'react'\
+import \{ useNavigate, useParams \} from 'react-router-dom'\
+\
+import axios from 'axios';\
+\
+\
+type IComment = \{\
+    postId?: number\
+    id: number\
+    email: string\
+    name: string\
+    body: string\
+\}\
+export default function EditComment() \{\
+\
+   const \{id\} =  useParams() \
+   const navigate = useNavigate()\
+\
+   const [record, setRecord] = useState<IComment>(\{\
+        name:'',email:'',body:'',id:0, postId:0\
+   \})\
+   \
+   useEffect(()=>\{\
+     axios.get(`http://localhost:4000/comments/$\{id\}`)\
+          .then((response:any)=>\{\
+                setRecord(response.data)\
+          \})\
+\
+   \},[])\
+   \
+   const handleChange = (event:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>\{\
+      setRecord(\{...record, [event.target.name]:event.target.value\})\
+   \}\
+\
+   \
+   const updateRecord = ()=>\{\
+    axios.put(\
+        `http://localhost:4000/comments/$\{record.id\}`,\
+        record,\
+        \{\
+            headers:\{'content-type':'application/json'\}\
+        \})\
+        .then((response) => \{\
+            alert(`Updated Record id:$\{record.id\} Successfully`)\
+            navigate('/comment/list')\
+         \
+        \})\
+        .catch((error) => \{\
+            console.log(error)\
+        \})\
+\}\
+  return (\
+    <div className='mt-4'>\
+         <h1>Edit Record No : \{id\}</h1>\
+         <p>\
+                    Enter Name : <input onChange=\{(e)=>handleChange(e)\} className="form-control" value=\{record.name\} \
+                                        name='name' type="text"  />\
+                  </p>\
+                  <p>\
+                    Enter Email : <input onChange=\{(e)=>handleChange(e)\} className="form-control" value=\{record.email\} \
+                                    name='email' type="text"  />\
+                  </p>\
+                  <p>\
+                    Enter Body : <textarea name="body" onChange=\{(e)=>handleChange(e)\} className="form-control"  value=\{record.body\}\
+                                           cols=\{30\} rows=\{10\}></textarea>\
+                  </p>\
+                  <p>\
+                     <button onClick=\{updateRecord\}>Update</button>\
+                  </p>\
+    </div>\
+  )\
+\}\
+\
+\
+\
+-------Assignment\
+Login.tsx\
+\
+import React, \{ useState,useEffect \} from 'react'\
+import axios from 'axios';\
+import \{ useNavigate \} from 'react-router-dom';\
+\
+type IloginForm = \{\
+    email: string\
+    password: string\
+\
+\
+\}\
+\
+export default function Login() \{\
+    const [message1, setMessage1] = useState<string>('')\
+\
+    const [loginForm, setloginForm] = useState<IloginForm>(\{ email: '', password: '' \})\
+\
+    const navigate = useNavigate()\
+\
+\
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => \{\
+        console.log(typeof event.target.value)\
+        setloginForm(\{ ...loginForm, [event.target.name]: event.target.value \})\
+    \}\
+\
+    const login = () => \{\
+        if(loginForm.email === 'admin')\{\
+             sessionStorage.setItem('role','admin')\
+             navigate('/home')\
+        \}\
+        else\{\
+              sessionStorage.setItem('role','guest')\
+              navigate('/home')\
+        \}\
+    \}\
+\
+\
+\
+    return (\
+        <div className='container mt-4'>\
+\
+            <p>Email Address :\
+                <input className='form-control' name='email' type="email" onChange=\{(event) => handleChange(event)\} />\
+            </p>\
+            <p>Password :\
+                <input className='form-control' name='password' type="password" onChange=\{(event) => handleChange(event)\} />\
+            </p>\
+\
+            <p>\
+                <button onClick=\{login\}>Login</button>\
+            </p>\
+\
+            <h6 className='text-success'>\{message1\}</h6>\
+        </div>\
+    )\
+\}\
+\
+Header.tsx\
+--\
+import React, \{ useEffect,useState \} from 'react'\
+import \{ Link, useNavigate \} from 'react-router-dom';\
+export default function Header() \{\
+     \
+   const [role, setRole] = useState<string|undefined>()\
+   const navigate = useNavigate()\
+    const res = useLocation()\
+  \
+    useEffect(()=>\{\
+      let role1:any =  sessionStorage.getItem('role')\
+      setRole(role1)\
+    \},[res.pathname])  \
+  \
+  \
+  \
+  const logout = ()=>\{\
+      sessionStorage.removeItem('role')\
+      alert('logout successfully')\
+      navigate('/login')\
+  \}\
+\
+  return (\
+    <div className='container'>\
+         \
+        \{\
+            role=='admin'?\
+             <>\
+              \
+                <Link  to='/home'>Home</Link> &nbsp; &nbsp; &nbsp;\
+                <Link  to='/comment'>Comment</Link>\
+                <button onClick=\{logout\}>Logout</button>\
+  \
+             </>:\
+              role=='guest'?\
+             <>              \
+               <Link  to='/home'>Home</Link> &nbsp; &nbsp; &nbsp;\
+              <button onClick=\{logout\}>Logout</button>\
+              \
+              </>\
+              :\
+              <Link  to='/login'>Login</Link> \
+\
+\
+\
+        \}\
+\
+\
+\
+     \
+    </div>\
+  )\
+\}\
+\
+App.tsx\
+----------\
+<BrowserRouter>\
+               <Header/>\
+               <Routes>  \
+                  <Route path='/login' element=\{<Login/>\}/>              \
+                  <Route path="/home" element=\{<Home/>\}/>               \
+                  <Route path="/comment/*" element=\{<Comment/>\}/>  \
+               \
+               </Routes>\
+        </BrowserRouter>\
+\
+  \
+\
+\
+--------------------JSS_-------------------\
+  https://cssinjs.org/react-jss/?v=v10.9.2\
+  \
+  npm install react-jss\
+ Example:\
+\
+\
+Header.tsx\
+import React, \{ useEffect,useState \} from 'react'\
+import \{ Link, useLocation, useNavigate \} from 'react-router-dom';\
+import \{createUseStyles\} from 'react-jss'\
+\
+type IProps = \{\
+    case?:string,\
+    // theme:string\
+ \
+\}\
+\
+export default function Header(props:IProps) \{\
+     console.log(props)\
+   const [role, setRole] = useState<string|undefined>()\
+   \
+   const navigate = useNavigate()\
+    const res = useLocation()\
+   \
+    const myStyles = styles(props)\
+\
+  \
+    useEffect(()=>\{\
+      let role1:any =  sessionStorage.getItem('role')\
+      setRole(role1)\
+  \},[res.pathname])  \
+  \
+  \
+  const logout = ()=>\{\
+      sessionStorage.removeItem('role')\
+      alert('logout successfully')\
+      navigate('/login')\
+  \}\
+\
+  return (\
+    <div className='container'>\
+         \
+        \{\
+            role=='admin'?\
+             <>\
+              \
+                <Link  to='/home' className=\{myStyles.myTextColor\}>Home</Link> &nbsp; &nbsp; &nbsp;\
+                <Link  to='/comment'>Comment</Link>\
+                <button onClick=\{logout\}>Logout</button>\
+  \
+             </>:\
+              role=='guest'?\
+             <>              \
+               <Link  to='/home'>Home</Link> &nbsp; &nbsp; &nbsp;\
+              <button onClick=\{logout\}>Logout</button>\
+              \
+              </>\
+              :\
+              <Link  to='/login'>Login</Link> \
+\
+\
+\
+        \}\
+\
+\
+\
+     \
+    </div>\
+  )\
+\}\
+\
+\
+const styles = createUseStyles(\{\
+     \
+        myTextColor:\{\
+            color:'crimson',\
+            fontSize: 50,\
+            textTransform:(props:IProps) => props.case\
+   \
+         \}\
+     \
+      \
+       \
+      \
+\},\{ name: 'Header'\}) \
+\
+Header.defaultProps = \{\
+      case:'uppercase',\
+    \
+\}\
+\
+}

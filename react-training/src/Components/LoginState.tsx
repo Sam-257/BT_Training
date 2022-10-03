@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Greet from './Greet'
 
-const Login = () => {
+const LoginState = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
   return (
 	<>
@@ -12,4 +12,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default LoginState
