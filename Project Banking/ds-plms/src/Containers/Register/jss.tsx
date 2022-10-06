@@ -32,12 +32,16 @@ const useStyles = createUseStyles({
         justifyContent: 'center',
         alignItems:'center',
     },
-    loginBtn: {
+    registerBtn: {
         backgroundColor: blueColor,
         padding: '10px 20px',
         borderRadius: '5px',
         border: 'none',
         color: 'white',
+    },
+    radioWrap:{
+        display: 'flex',
+        justifyContent: 'space-between',
     }
 });
 

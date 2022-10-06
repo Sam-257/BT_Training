@@ -47,8 +47,8 @@
       "currentemployer": "Amazon",
       "designation": "Developer",
       "loanAmountToApply": "3500",
-      "approved": false,
-      "rejected": true,
+      "approved": true,
+      "rejected": false,
       "id": 1
     },
     {
@@ -69,9 +69,31 @@
       "currentemployer": "Amazon",
       "designation": "Developer",
       "loanAmountToApply": "1111",
-      "approved": true,
+      "approved": false,
       "rejected": false,
       "id": 2
+    },
+    {
+      "name": "test1",
+      "email": "test1@gmail.com",
+      "password": "test1",
+      "gender": "male",
+      "salary": "121212",
+      "role": "CUSTOMER",
+      "age": 21,
+      "logo": "https://download.logo.wine/logo/Chase_Bank/Chase_Bank-Logo.wine.png",
+      "title": "Chase",
+      "loanAmount": "$5,000-$100,000",
+      "interestRates": "4.99% -15.69%",
+      "Mincreditscore": "660",
+      "TermLenghth": "48 Months",
+      "ProcessingFee": "$100",
+      "currentemployer": "Amazon",
+      "designation": "Developer",
+      "loanAmountToApply": "1111",
+      "approved": false,
+      "rejected": true,
+      "id": 3
     }
   ],
   "user": [
@@ -122,9 +144,62 @@
       "password": "zaq1zaq1!",
       "gender": "male",
       "salary": "40000",
-      "age": 45,
       "role": "CUSTOMER",
       "id": 6
+    },
+    {
+      "name": "sdasd",
+      "email": "asdasd",
+      "password": "asdasd",
+      "gender": "female",
+      "salary": "89092",
+      "role": "CUSTOMER",
+      "id": 7
+    },
+    {
+      "name": "test1",
+      "email": "test1@gmail.com",
+      "password": "test1",
+      "gender": "male",
+      "salary": "121212",
+      "role": "CUSTOMER",
+      "id": 8
+    },
+    {
+      "name": "Sambhav",
+      "email": "sambhav@gmail.com",
+      "password": "sambhav",
+      "gender": "male",
+      "salary": "10000000",
+      "role": "CUSTOMER",
+      "id": 9
+    },
+    {
+      "name": "test2",
+      "email": "test2@gmail.com",
+      "password": "test2",
+      "gender": "female",
+      "salary": "1",
+      "role": "CUSTOMER",
+      "id": 10
+    },
+    {
+      "name": "test3",
+      "email": "test3@gmail.com",
+      "password": "test3",
+      "gender": "female",
+      "salary": "2",
+      "role": "CUSTOMER",
+      "id": 11
+    },
+    {
+      "name": "test4",
+      "email": "test4@gmail.com",
+      "password": "test4",
+      "gender": "female",
+      "salary": "3",
+      "role": "CUSTOMER",
+      "id": 12
     }
   ]
 }

@@ -14,7 +14,7 @@ const useStyles = createUseStyles({
         position: 'absolute',
     },
     contentWrapper: {
-        margin: '70px auto',
+        margin: '140px auto',
         width: '70%',
         padding: '10px',
         textAlign: 'center',
