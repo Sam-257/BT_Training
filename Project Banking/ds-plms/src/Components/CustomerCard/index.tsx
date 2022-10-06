@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import useStyles from './jss';
 
 type Loan= {
@@ -17,13 +19,33 @@ type Loan= {
     rejected?: boolean;
 }
 
+type ILoans = {
+    logo: string,
+    title: string,
+    loanAmount: string,
+    interestRates: string,
+    Mincreditscore: string,
+    TermLenghth: string,
+    ProcessingFee: string,
+  }
+  
+
 type Props = {
     loan: Loan
+    loans: ILoans
 } 
 
+const url = "http://localhost:8080";
 
-const CustomerCard = ({loan}: Props) => {
+const CustomerCard = ({loan, loans}: Props) => {
     const classes = useStyles();
+    const navigate = useNavigate()
+    const handleApply = () => {
+        axios.get(`${url}/appliedNewLoans`)
+        .then((res) => { !!res.data.find((item: any)=>item.email === sessionStorage.getItem('email') && item.title === loan.bankName)? alert(`You've already applied for this loan.`): navigate("/customer/applyNow", {state: {loans}})})
+        .catch(err => console.log(err));
+      };
+
   return (
     <div className={classes.card}>
         <div className={classes.top}>
@@ -43,7 +65,7 @@ const CustomerCard = ({loan}: Props) => {
             </div>
         </div>
         <div className={!loan.applied ? `mt-3 ${classes.bottom}` : loan.approved ? `mt-3 bg-success ${classes.bottom}` : loan.rejected ? `mt-3 bg-danger ${classes.bottom}` : `mt-3 bg-secondary ${classes.bottom}`}>
-            {!loan.applied ? <button className={classes.applyBtn} >Apply now</button> : <p className='text-white'>Application {loan.approved ? 'Approved' : loan.rejected ? 'Rejected' : 'Pending' } </p>}
+            {!loan.applied ? <button className={classes.applyBtn} onClick={handleApply} >Apply now</button> : <p className='text-white'>Application {loan.approved ? 'Approved' : loan.rejected ? 'Rejected' : 'Pending' } </p>}
         </div>
     </div>
   )

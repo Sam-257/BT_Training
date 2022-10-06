@@ -57,7 +57,7 @@ const AppliedLoans = (props: Props) => {
                 approved: item.approved,
                 rejected: item.rejected, 
             }
-            return <CustomerCard key={item.id} loan={loan} />
+            return <CustomerCard key={item.id} loan={loan} loans={item}/>
         }) : <h1 className='m-auto text-white'> You haven't applied any loans yet.</h1>}
     </>
   )

@@ -12,6 +12,7 @@ import ManagerNavBar from './Components/ManagerNavbar';
 import LoansContainer from './Containers/Manager/LoansContainer';
 import PrivateCustomerRoute from './utils/PrivateRoutes/PrivateCustomerRoute';
 import PrivateManagerRoute from './utils/PrivateRoutes/PrivateManagerRoute';
+import ApplyNow from './Containers/Customers/ApplyNow';
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
                 <Route index element={<Navigate to='/customer/allLoans' />} />
                 <Route path="allLoans" element={<AllLoans />} />
                 <Route path="appliedLoans" element={<AppliedLoans />} />
+                <Route path="applyNow" element={<ApplyNow />} />
               </Route> 
             </Route>
             <Route element={<PrivateManagerRoute />}>

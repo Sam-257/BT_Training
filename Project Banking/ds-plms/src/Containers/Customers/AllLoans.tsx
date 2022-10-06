@@ -41,7 +41,7 @@ const AllLoans = (props: Props) => {
                 termLength: item.TermLenghth,
                 processingFee: item.ProcessingFee
             }
-            return <CustomerCard key={index} loan={loan} />
+            return <CustomerCard key={index} loan={loan} loans={item}/>
         })}
     </>
   )
